@@ -39,7 +39,6 @@ $get_help_items_query = 'SELECT * FROM main_helpsubject s
 mysqli_select_db($connect, $database_connect);
 $get_help_items = mysqli_query_ported($get_help_items_query, $connect) or die(mysqli_error($connect));
 $help_item = mysqli_fetch_assoc($get_help_items);
-echo mysqli_num_rows($get_help_items);
 
 ?>
 <!DOCTYPE html>
