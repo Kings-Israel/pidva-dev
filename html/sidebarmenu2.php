@@ -583,6 +583,13 @@
                             }
 
                     ?>
+        <li class="<?php if ($urlpar == 'hel') { echo "active"; } ?>">
+            <a href="/html/help/help.php">
+                <i class="menu-icon fa fa-question-circle"></i>
+                Help Section
+            </a>
+            <b class="arrow"></b>
+        </li>
         <li class="">
             <a href="<?php echo $logoutAction ?>">
                 <i class="menu-icon fa fa-eye-slash "></i>
