@@ -64,15 +64,17 @@ if (isset($_POST['message'])) {
     GetSQLValueString($date->format('Y-m-d H:i:sP'), "date")
   );
 	$response = mysqli_query_ported($insert_sql, $connect);
-  echo $response === TRUE ? "OK" : "ERROR";
-  // if ($response === TRUE) {
-  //   $update_sql = sprintf("UPDATE main_helpmessage SET read_at = %s WHERE subject_id = %s", GetSQLValueString($date->format('Y-m-d H:i:sP'), "date"), $help_id);
-  //   mysqli_select_db($connect,$database_connect);
-  //   mysqli_query_ported($update_sql, $connect) or die(mysqli_error($connect));
-  //   header(sprintf("Location: %s", './help.php'));
-  // } else {
-  //   // TODO: Add error message
-  // }
+  // echo $response === TRUE ? "OK" : "ERROR";
+  if ($response === TRUE) {
+    $update_sql = sprintf("UPDATE main_helpmessage SET read_at = %s WHERE subject_id = %s", GetSQLValueString($date->format('Y-m-d H:i:sP'), "date"), $help_id);
+    mysqli_select_db($connect,$database_connect);
+    mysqli_query_ported($update_sql, $connect) or die(mysqli_error($connect));
+    header(sprintf("Location: %s", './help.php'));
+  } else {
+    // TODO: Add error message
+    $error = mysqli_error($connect);
+    echo "Error: $error";
+  }
 }
 ?>
 
