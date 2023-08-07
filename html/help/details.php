@@ -61,19 +61,19 @@ if (isset($_POST['message'])) {
     "INSERT INTO main_helpresponse (response, subject_id, created_at) VALUES (%s, %s, %s)", 
     GetSQLValueString($_POST['message'], "text"),
     GetSQLValueString($help_id, "int"),
-    GetSQLValueString($date->format('Y-m-d H:i:sP'), "date")
+    GetSQLValueString($date->format('Y-m-d H:i:s'), "date")
   );
 	$response = mysqli_query_ported($insert_sql, $connect);
-  // echo $response === TRUE ? "OK" : "ERROR";
+
   if ($response === TRUE) {
-    $update_sql = sprintf("UPDATE main_helpmessage SET read_at = %s WHERE subject_id = %s", GetSQLValueString($date->format('Y-m-d H:i:sP'), "date"), $help_id);
+    $update_sql = sprintf("UPDATE main_helpmessage SET read_at = %s WHERE subject_id = %s", GetSQLValueString($date->format('Y-m-d H:i:s'), "date"), $help_id);
     mysqli_select_db($connect,$database_connect);
     mysqli_query_ported($update_sql, $connect) or die(mysqli_error($connect));
     header(sprintf("Location: %s", './help.php'));
   } else {
     // TODO: Add error message
     $error = mysqli_error($connect);
-    echo "Error: $error";
+    // echo "Error: $error";
   }
 }
 ?>
