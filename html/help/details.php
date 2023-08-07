@@ -63,13 +63,16 @@ if (isset($_POST['message'])) {
     GetSQLValueString($help_id, "int"),
     GetSQLValueString($date->format('Y-m-d H:i:sP'), "date")
   );
-  mysqli_select_db($connect, $database_connect);
-	mysqli_query_ported($insert_sql, $connect);
-  
-  // $update_sql = sprintf("UPDATE main_helpmessage SET read_at = %s WHERE subject_id = %s", GetSQLValueString($date->format('Y-m-d H:i:sP'), "date"), $help_id);
-  // mysqli_select_db($connect,$database_connect);
-  // mysqli_query_ported($update_sql, $connect) or die(mysqli_error($connect));
-  header(sprintf("Location: %s", './help.php'));
+	$response = mysqli_query_ported($insert_sql, $connect);
+  echo $response === TRUE ? "OK" : "ERROR";
+  // if ($response === TRUE) {
+  //   $update_sql = sprintf("UPDATE main_helpmessage SET read_at = %s WHERE subject_id = %s", GetSQLValueString($date->format('Y-m-d H:i:sP'), "date"), $help_id);
+  //   mysqli_select_db($connect,$database_connect);
+  //   mysqli_query_ported($update_sql, $connect) or die(mysqli_error($connect));
+  //   header(sprintf("Location: %s", './help.php'));
+  // } else {
+  //   // TODO: Add error message
+  // }
 }
 ?>
 
@@ -257,7 +260,7 @@ if (isset($_POST['message'])) {
                       <fieldset>
                         <label class="block clearfix">
                           <span class="block input-icon input-icon-right"><span id="sprytextfield2">
-                          <input id="username" name="message" type="text" class="form-control" placeholder="Message" autocomplete="off" />
+                          <input id="username" name="message" type="text" class="form-control" placeholder="Message" autocomplete="off" autofocus />
                         </label>
 
                         <div class="clearfix">
