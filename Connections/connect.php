@@ -1,7 +1,8 @@
 <?php
 
-$configs = parse_ini_file("/var/www/html/pidva-real-dev/pidva-dev/config/config.ini", true);
-$configs = $configs['database'];
+// $configs = parse_ini_file("/var/www/html/pidva/config/config.ini", true);
+$configs = parse_ini_file("config.ini", true);
+$configs = $configs['database_localhost'];
 date_default_timezone_set('Africa/Nairobi');
 
 $hostname_connect = $configs['host'];
@@ -57,7 +58,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 {
     $connect = $GLOBALS['connect'];
 
-    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+    // $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
 
     $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($connect, $theValue) : mysqli_escape_string($connect, $theValue);
 
@@ -83,7 +84,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 // http://localhost/html/company/companyregcheck.php?fullnames=MARITA%20MUTEMI%20(marita@peleza.com)&status=11&search_id_approve=BOYA-RQ-C46D3Z2-102603&request_id=2606&moduleid=47
-$ref_number = GetSQLValueString(isset($request['request_ref_number']) ? $request['request_ref_number'] : $_GET['search_id_approve'], 'text');
+// $ref_number = GetSQLValueString(isset($request['request_ref_number']) ? $request['request_ref_number'] : $_GET['search_id_approve'], 'text');
 
 
 
