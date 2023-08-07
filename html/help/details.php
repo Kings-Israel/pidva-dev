@@ -66,9 +66,9 @@ if (isset($_POST['message'])) {
   mysqli_select_db($connect, $database_connect);
 	mysqli_query_ported($insert_sql, $connect);
   
-  $update_sql = sprintf("UPDATE main_helpmessage SET read_at = %s WHERE subject_id = %s", GetSQLValueString($date->format('Y-m-d H:i:sP'), "date"), $help_id);
-  mysqli_select_db($connect,$database_connect);
-  mysqli_query_ported($update_sql, $connect) or die(mysqli_error($connect));
+  // $update_sql = sprintf("UPDATE main_helpmessage SET read_at = %s WHERE subject_id = %s", GetSQLValueString($date->format('Y-m-d H:i:sP'), "date"), $help_id);
+  // mysqli_select_db($connect,$database_connect);
+  // mysqli_query_ported($update_sql, $connect) or die(mysqli_error($connect));
   header(sprintf("Location: %s", './help.php'));
 }
 ?>
