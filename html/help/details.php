@@ -51,27 +51,26 @@ if ($responses_count > 0) {
 
 usort($texts, 'date_compare');
 
-if (isset($_POST['message'])) {
-  $timestamp = time(); 
-  $date = new DateTime("@".$timestamp);
+// if (isset($_POST['message'])) {
+//   $timestamp = time(); 
+//   $date = new DateTime("@".$timestamp);
 
-  $date->setTimezone(new DateTimeZone('Africa/Nairobi'));   
-  // echo $date->format('Y-m-d H:i:sP') . "<br>";
+//   $date->setTimezone(new DateTimeZone('Africa/Nairobi'));   
 
-  $insert_sql = sprintf(
-    "INSERT INTO main_helpresponse (response, subject_id, created_at) VALUES (%s, %s, %s)", 
-    GetSQLValueString($_POST['message'], "text"),
-    GetSQLValueString($help_id, "int"),
-    GetSQLValueString($date->format('Y-m-d H:i:sP'), "date"),
-  );
-  mysqli_select_db($connect, $database_connect);
-	mysqli_query_ported($insert_sql, $connect);
+//   $insert_sql = sprintf(
+//     "INSERT INTO main_helpresponse (response, subject_id, created_at) VALUES (%s, %s, %s)", 
+//     GetSQLValueString($_POST['message'], "text"),
+//     GetSQLValueString($help_id, "int"),
+//     GetSQLValueString($date->format('Y-m-d H:i:sP'), "date"),
+//   );
+//   mysqli_select_db($connect, $database_connect);
+// 	mysqli_query_ported($insert_sql, $connect);
   
-  $update_sql = sprintf("UPDATE main_helpmessage SET read_at = %s WHERE subject_id = %s", GetSQLValueString($date->format('Y-m-d H:i:sP'), "date"), $help_id);
-  mysqli_select_db($connect,$database_connect);
-  mysqli_query_ported($update_sql, $connect) or die(mysqli_error($connect));
-  header(sprintf("Location: %s", './help.php'));
-}
+//   $update_sql = sprintf("UPDATE main_helpmessage SET read_at = %s WHERE subject_id = %s", GetSQLValueString($date->format('Y-m-d H:i:sP'), "date"), $help_id);
+//   mysqli_select_db($connect,$database_connect);
+//   mysqli_query_ported($update_sql, $connect) or die(mysqli_error($connect));
+//   header(sprintf("Location: %s", './help.php'));
+// }
 ?>
 
 <!DOCTYPE html>
