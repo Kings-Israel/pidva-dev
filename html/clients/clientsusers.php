@@ -3,10 +3,6 @@ require_once('./credential_mailer.php');
 //require_once('./apikey_mailer.php');
 $updateGoTo = "clientsusers.php";
 
-
-   
-
-
 if (!function_exists("GetSQLValueString")) {
     function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
     {
@@ -77,7 +73,6 @@ function randomPassword($len)
 }
 
 if ((isset($_GET['client_id'])) && ($_GET['client_id'] != "") && (!isset($_POST["MM_insert"])) && (!isset($_POST["MM_update"]))) {
-
     if ($_GET['status'] == '11') {
         function GeraHash3($qtd)
         {
@@ -91,7 +86,6 @@ if ((isset($_GET['client_id'])) && ($_GET['client_id'] != "") && (!isset($_POST[
                 $Posicao = rand(0, $QuantidadeCaracteres);
                 $Hash .= substr($Caracteres, $Posicao, 1);
             }
-
             return $Hash;
         }
 
@@ -107,7 +101,6 @@ if ((isset($_GET['client_id'])) && ($_GET['client_id'] != "") && (!isset($_POST[
                 $Posicao = rand(0, $QuantidadeCaracteres);
                 $Hash .= substr($Caracteres, $Posicao, 1);
             }
-
             return $Hash;
         }
 
@@ -123,13 +116,11 @@ if ((isset($_GET['client_id'])) && ($_GET['client_id'] != "") && (!isset($_POST[
                 $Posicao = rand(0, $QuantidadeCaracteres);
                 $Hash .= substr($Caracteres, $Posicao, 1);
             }
-
             return $Hash;
         }
 
-
         $usr_password = randomPassword(10);
-		$usr_password_client_id = randomPassword(10);
+        $usr_password_client_id = randomPassword(10);
 
         $client_name = $_GET['name'];
         $client_email = trim($_GET['USR_EMAIL']);
@@ -149,16 +140,14 @@ if ((isset($_GET['client_id'])) && ($_GET['client_id'] != "") && (!isset($_POST[
         mysqli_select_db($connect, $database_connect);
         $Result1 = mysqli_query_ported($deleteSQL, $connect) or die(mysqli_error($connect));
 
+        // SEND MAIL
+        // if ($account_type == 'psmt') {
+        //     $auth_mailer->send_mail($client_name, $client_email, $usr_password, $account_type, $client_company_id);
+        // } else {
+        //     $auth_mailer->send_mail($client_name, $client_email, $usr_password, $account_type, $client_company_id);
+        // }
 
-        // SEND MAIL'
-                       
-        if ($account_type == 'psmt') {
-            
-            $auth_mailer->send_mail($client_name, $client_email, $usr_password, $account_type, $client_company_id);
-        } else {
-       
-            $auth_mailer->send_mail($client_name, $client_email, $usr_password, $account_type);
-        }
+        $auth_mailer->send_mail($client_name, $client_email, $usr_password, $account_type, $client_company_id);
 
         if (!empty($_SERVER['HTTP_REFERER'])) {
             header("Location: " . $_SERVER['HTTP_REFERER']);
@@ -166,7 +155,6 @@ if ((isset($_GET['client_id'])) && ($_GET['client_id'] != "") && (!isset($_POST[
             header("Location: index.php");
         }
     } elseif ($_GET['status'] == '00') {
-
         $deleteSQL = sprintf(
             "UPDATE pel_client SET status=%s, added_by=%s, added_date=%s  WHERE client_id=%s",
             GetSQLValueString($_GET['status'], "text"),
@@ -177,7 +165,6 @@ if ((isset($_GET['client_id'])) && ($_GET['client_id'] != "") && (!isset($_POST[
         mysqli_select_db($connect, $database_connect);
         $Result1 = mysqli_query_ported($deleteSQL, $connect) or die(mysqli_error($connect));
     } elseif ($_GET['status'] == '22') {
-
         $deleteSQL = sprintf(
             "UPDATE pel_client SET status=%s, added_by=%s, added_date=%s  WHERE client_id=%s",
             GetSQLValueString($_GET['status'], "text"),
@@ -188,15 +175,12 @@ if ((isset($_GET['client_id'])) && ($_GET['client_id'] != "") && (!isset($_POST[
         mysqli_select_db($connect, $database_connect);
         $Result1 = mysqli_query_ported($deleteSQL, $connect) or die(mysqli_error($connect));
     }
-
-
     header("Location: /html/clients/clientsusers.php");
 }
 
 $errorcode = '';
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editclient")) {
-
     if ($_POST['client_parent_company'] == 'NO AFFILIATION') {
         $client_company_id = strtoupper($_POST['client_first_name']) . " " . strtoupper($_POST['client_last_name']);
     } else {
@@ -232,20 +216,19 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editclient")) {
 
     if (mysqli_error($connect)) {
         $errorcode = '<div class="alert alert-danger">
-											<button type="button" class="close" data-dismiss="alert">
-												<i class="ace-icon fa fa-times"></i>
-											</button>
+                        <button type="button" class="close" data-dismiss="alert">
+                            <i class="ace-icon fa fa-times"></i>
+                        </button>
 
-											<strong>
-												<i class="ace-icon fa fa-times"></i>
-												ERROR!!!!!
-											</strong>
+                        <strong>
+                            <i class="ace-icon fa fa-times"></i>
+                            ERROR!!!!!
+                        </strong>
 
-											 Details of the Client in the Particluar Country already existing.
-											<br />
-										</div>';
+                            Details of the Client in the Particluar Country already existing.
+                        <br />
+                    </div>';
     } else {
-
         $updateGoTo = "clientsusers.php";
         if (isset($_SERVER['QUERY_STRING'])) {
             $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
@@ -257,10 +240,8 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editclient")) {
     $account_type = $_POST['account_type'];
 
     if ($_POST['client_parent_company'] == 'NO AFFILIATION') {
-
         $client_company_id = strtoupper($_POST['client_first_name']) . " " . strtoupper($_POST['client_last_name']);
     } else {
-
         $client_company_id2 = strtoupper($_POST['client_parent_company']);
 
         mysqli_select_db($connect, $database_connect);
@@ -273,8 +254,8 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editclient")) {
 
     $usr_password = randomPassword(8);
     $usr_password_client_id = hash('sha256', randomPassword(10));
-	
-$insertSQL = sprintf(
+
+    $insertSQL = sprintf(
         "INSERT INTO pel_client (client_first_name, client_mobile_number, status, client_email_address, client_parent_company, client_country, added_by, client_industry, added_date, client_last_name, client_login_username, client_company_id,client_password,client_type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         GetSQLValueString(strtoupper($_POST['client_first_name']), "text"),
         GetSQLValueString(strtoupper($_POST['client_mobile_number']), "text"),
@@ -289,11 +270,29 @@ $insertSQL = sprintf(
         GetSQLValueString($_POST['client_email_address'], "text"),
         GetSQLValueString($client_company_id, "text"),
         GetSQLValueString(md5($usr_password), "text"),
-	//GetSQLValueString($usr_password_client_id, "text"),
+        //GetSQLValueString($usr_password_client_id, "text"),
         GetSQLValueString($account_type, "text")
     );
-//exit ();
+    //exit ();
     if ($connect->query($insertSQL)) {
+        $get_user_id_sql = "SELECT client_id FROM pel_client WHERE client_login_username = '".$_POST['client_email_address']."'";
+        $user = $connect->query($get_user_id_sql);
+        $user_id = mysqli_fetch_assoc($user);
+        
+        $get_permissions_sql = "SELECT id FROM main_permissions";
+        $permissions = $connect->query($get_permissions_sql);
+        $permission = mysqli_fetch_assoc($permissions);
+
+        do {
+            $insert_permissions_sql = sprintf("INSERT INTO main_userhaspermission (permission_id, user_id) VALUES (%d, %d)",
+                $permission['id'],
+                $user_id['client_id']
+            );
+            $connect->query($insert_permissions_sql);
+        } while ($permission = mysqli_fetch_assoc($permissions));
+
+        $auth_mailer->send_mail($_POST['client_first_name'].' '.$_POST['client_last_name'], $_POST['client_email_address'], $usr_password, $account_type, $client_company_id);
+
         header("Location: " . $updateGoTo);
     } else {
         echo 'NOT';
@@ -325,7 +324,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $totalRows_getindustries = mysqli_num_rows($getindustries);
 }
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -421,7 +421,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     ace.settings.check('sidebar', 'collapsed')
                 } catch (e) {}
             </script>
-
         </div>
 
         <!-- /section:basics/sidebar -->
@@ -464,24 +463,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
                 <!-- /section:basics/content.breadcrumbs -->
                 <div class="page-content">
-
-
                     <div class="row">
                         <div class="col-xs-12">
-                            <!-- PAGE CONTENT BEGINS -->
-                            <!--
+                        <!-- PAGE CONTENT BEGINS -->
+                        <!--
                         <div class="hr hr-18 dotted hr-double"></div>
 
-                <h4 class="pink">
+                        <h4 class="pink">
                             <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
-                            <a href="#modal-table" role="button" class="green" data-toggle="modal"> Table Inside a Modal Box </a>								</h4>
+                            <a href="#modal-table" role="button" class="green" data-toggle="modal"> Table Inside a Modal Box </a>
+                        </h4>
 
                         <div class="hr hr-18 dotted hr-double"></div>
--->
+                        -->
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="col-xs-6">
-
                                         <h3 align="left" class="header smaller lighter blue">PELEZA CLIENT REGISTERED</h3>
                                     </div>
 
@@ -530,10 +527,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                 <tr>
                                                     <th class="center">
                                                         <!--<label class="pos-rel">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>															</label>-->
+                                                        <input type="checkbox" class="ace" />
+                                                        <span class="lbl"></span>
+                                                        </label>-->
                                                         NO:
-
                                                     </th>
                                                     <th>Client Name</th>
                                                     <th>Client Credits</th>
@@ -542,12 +539,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                     <th>Email Address</th>
                                                     <th>Mobile Number</th>
                                                     <th>Parent Company</th>
-
                                                     <th>More</th>
-
-
                                                     <th class="hidden-480">Status</th>
-
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -586,29 +579,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
                                                         </td>
 
-
-                                                        <td class="hidden-480"><?php
-
-                                                                                if ($row_getallclients['status'] == '11') {
-                                                                                ?>
-
+                                                        <td class="hidden-480">
+                                                            <?php
+                                                                if ($row_getallclients['status'] == '11') {
+                                                            ?>
                                                                 <span class="label label-sm label-success">Active</span>
                                                             <?php
-                                                                                }
-                                                                                if ($row_getallclients['status'] == '00') {
+                                                                }
+                                                                if ($row_getallclients['status'] == '00') {
                                                             ?>
                                                                 <span class="label label-sm label-danger">Deactivated</span>
                                                             <?php
-                                                                                }
-                                                                                if ($row_getallclients['status'] == '22') {
+                                                                }
+                                                                if ($row_getallclients['status'] == '22') {
                                                             ?>
                                                                 <span class="label label-sm label-warning">Unverified</span>
                                                             <?php
-                                                                                }
+                                                                }
                                                             ?>
                                                         </td>
-
-
                                                         <td>
                                                             <div class="hidden-sm hidden-xs action-buttons">
 
@@ -1019,8 +1008,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                         </td>
                                                     </tr>
                                                 <?php } while ($row_getallclients = mysqli_fetch_assoc($getallclients)); ?>
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -1038,10 +1025,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                             </div>
                                         </div>
                                         <div class="modal-body no-padding">
-
-
                                             <form method="POST" action="<?php echo $editFormAction; ?>" class="form-horizontal" name="newclient">
-
                                                 <input type="hidden" id="status" name="status" value="22" />
                                                 <input type="hidden" id="added_by" name="added_by" value="<?php echo $_SESSION['MM_full_names'] . "(" . $_SESSION['MM_USR_EMAIL'] . ")"; ?>" />
                                                 <input type="hidden" id="added_date" name="added_date" value="<?php echo date('d-m-Y H:m:s'); ?>" />
@@ -1049,12 +1033,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-pass1">Client Name</label>
-
                                                     <div class="col-sm-9"><span id="sprytextfield5">
-                                                            <input type="text" id="client_first_name" name="client_first_name" />
-                                                            <span class="textfieldRequiredMsg">*</span></span></div>
-
-
+                                                        <input type="text" id="client_first_name" name="client_first_name" />
+                                                        <span class="textfieldRequiredMsg">*</span></span>
+                                                    </div>
                                                 </div>
 
                                                 <div class="space-4"></div>
@@ -1062,9 +1044,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-pass1">Other Names</label>
 
                                                     <div class="col-sm-9"><span id="sprytextfield6">
-                                                            <input type="text" id="client_last_name" name="client_last_name" />
-                                                            <span class="textfieldRequiredMsg">*</span></span></div>
-
+                                                        <input type="text" id="client_last_name" name="client_last_name" />
+                                                        <span class="textfieldRequiredMsg">*</span></span>
+                                                    </div>
                                                 </div>
 
                                                 <div class="space-4"></div>
@@ -1073,8 +1055,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-pass2">Email Address</label>
 
                                                     <div class="col-sm-9"><span id="sprytextfield7">
-                                                            <input type="text" id="client_email_address" name="client_email_address" />
-                                                            <span class="textfieldRequiredMsg">*</span></span></div>
+                                                        <input type="text" id="client_email_address" name="client_email_address" />
+                                                        <span class="textfieldRequiredMsg">*</span></span>
+                                                    </div>
                                                 </div>
 
                                                 <div class="space-4"></div>
@@ -1083,10 +1066,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-pass2">Mobile Number</label>
 
                                                     <div class="col-sm-9"><span id="sprytextfield8">
-                                                            <input type="text" id="client_mobile_number" name="client_mobile_number" />
-                                                            <span class="textfieldRequiredMsg">*</span></span></div>
+                                                        <input type="text" id="client_mobile_number" name="client_mobile_number" />
+                                                        <span class="textfieldRequiredMsg">*</span></span>
+                                                    </div>
                                                 </div>
-
 
                                                 <div class="space-4"></div>
 
@@ -1094,16 +1077,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-pass2">Country</label>
 
                                                     <div class="col-sm-6"><span id="spryselect4">
-                                                            <select class="chosen-select form-control" name="client_country" id="client_country" data-placeholder="Choose Industry...">
+                                                        <select class="chosen-select form-control" name="client_country" id="client_country" data-placeholder="Choose Industry...">
 
-                                                                <option value="000">Choose Country</option>
+                                                            <option value="000">Choose Country</option>
 
-                                                                <?php do { ?>
-                                                                    <option value="<?php echo $row_getcountries['country_name']; ?>"><?php echo $row_getcountries['country_name']; ?></option>
-                                                                <?php } while ($row_getcountries = mysqli_fetch_assoc($getcountries)); ?>
-                                                            </select>
+                                                            <?php do { ?>
+                                                                <option value="<?php echo $row_getcountries['country_name']; ?>"><?php echo $row_getcountries['country_name']; ?></option>
+                                                            <?php } while ($row_getcountries = mysqli_fetch_assoc($getcountries)); ?>
+                                                        </select>
 
-                                                            <span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*</span></span></div>
+                                                        <span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*</span></span>
+                                                    </div>
                                                 </div>
 
                                                 <div class="space-4"></div>
@@ -1112,16 +1096,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-pass2">Industry</label>
 
                                                     <div class="col-sm-6"><span id="spryselect5">
-                                                            <select class="chosen-select form-control" name="client_industry" id="client_industry" data-placeholder="Choose Industry...">
+                                                        <select class="chosen-select form-control" name="client_industry" id="client_industry" data-placeholder="Choose Industry...">
 
-                                                                <option value="000">Choose Industry</option>
+                                                            <option value="000">Choose Industry</option>
 
-                                                                <?php do { ?>
-                                                                    <option value="<?php echo $row_getindustries['industry_name']; ?>"><?php echo $row_getindustries['industry_name']; ?></option>
-                                                                <?php } while ($row_getindustries = mysqli_fetch_assoc($getindustries)); ?>
-                                                            </select>
+                                                            <?php do { ?>
+                                                                <option value="<?php echo $row_getindustries['industry_name']; ?>"><?php echo $row_getindustries['industry_name']; ?></option>
+                                                            <?php } while ($row_getindustries = mysqli_fetch_assoc($getindustries)); ?>
+                                                        </select>
 
-                                                            <span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*</span></span></div>
+                                                        <span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*</span></span>
+                                                    </div>
                                                 </div>
 
                                                 <div class="space-4"></div>
@@ -1130,17 +1115,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-pass2">Parent Company</label>
 
                                                     <div class="col-sm-6"><span id="spryselect6">
-                                                            <select class="chosen-select form-control" name="client_parent_company" id="client_parent_company" data-placeholder="Choose Company...">
+                                                        <select class="chosen-select form-control" name="client_parent_company" id="client_parent_company" data-placeholder="Choose Company...">
 
-                                                                <option value="000"></option>
-                                                                <option value="NO AFFILIATION">NO AFFILIATION</option>
+                                                            <option value="000"></option>
+                                                            <option value="NO AFFILIATION">NO AFFILIATION</option>
 
-                                                                <?php do { ?>
-                                                                    <option value="<?php echo $row_getcompanys['company_name']; ?>"><?php echo $row_getcompanys['company_name']; ?></option>
-                                                                <?php } while ($row_getcompanys = mysqli_fetch_assoc($getcompanys)); ?>
-                                                            </select>
+                                                            <?php do { ?>
+                                                                <option value="<?php echo $row_getcompanys['company_name']; ?>"><?php echo $row_getcompanys['company_name']; ?></option>
+                                                            <?php } while ($row_getcompanys = mysqli_fetch_assoc($getcompanys)); ?>
+                                                        </select>
 
-                                                            <span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*</span></span></div>
+                                                        <span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*</span></span>
+                                                    </div>
                                                 </div>
 
                                                 <div class="form-group">
@@ -1152,7 +1138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                                 <option value="edcheck">EDCheck Africa</option>
                                                                 <option value="idcheck">IDCheck Africa</option>
                                                                 <option value="psmt">PSMT</option>
-<option value="psmt">KYC</option>
+                                                                <option value="psmt">KYC</option>
                                                             </select>
                                                             <span class="selectInvalidMsg">*</span>
                                                             <span class="selectRequiredMsg">*</span>
@@ -1296,7 +1282,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <script type="text/javascript">
         function generateAPIKey(client_id) {
 
-                     var data = {
+            var data = {
                 client_id: client_id
             };
 
@@ -1322,7 +1308,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         text: "PSMT",
                         value: "psmt",
                     },
- 		 kyc: {
+                    kyc: {
                         text: "KYC",
                         value: "psmt",
                     },
