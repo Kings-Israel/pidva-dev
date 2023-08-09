@@ -215,8 +215,8 @@ class AuthMailer
         $mail->Subject = 'Your Peleza Account Activation';
         $mail->Body = $bodyContent;
 
-        // if (!$mail->Send()) {
-        if (!$mail->send()) {
+        if (!$mail->Send()) {
+        // if (!$mail->send()) {
             echo 'Error while sending Email.';
             //var_dump($mail);
         } else {
