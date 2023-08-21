@@ -14,7 +14,7 @@
             $configs = parse_ini_file("config/config.ini", true);
             $configs = json_decode(json_encode($configs));
 
-            $this->config = $configs->database;
+            $this->config = $configs->database_localhost;
             $this->logger = new MenuLogger($configs->log);
         }
 

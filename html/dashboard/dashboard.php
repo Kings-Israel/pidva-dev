@@ -149,7 +149,7 @@ $totalRows_countclients2 = mysqli_num_rows($countclients2);?><!DOCTYPE html>
 			<script type="text/javascript">
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
 			</script>
-<?php include('../header2.php');?>
+			<?php include('../header2.php');?>
 		</div>
 
 		<!-- /section:basics/navbar.layout -->
@@ -159,14 +159,13 @@ $totalRows_countclients2 = mysqli_num_rows($countclients2);?><!DOCTYPE html>
 			</script>
 
 			<!-- #section:basics/sidebar -->
-			<div id="sidebar" class="sidebar                  responsive">
+			<div id="sidebar" class="sidebar responsive">
 				<script type="text/javascript">
 					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 				</script>
-                <?php include('../sidebarmenu2.php');?>
+        <?php include('../sidebarmenu2.php');?>
                 
-                
-	<!-- #section:basics/sidebar.layout.minimize -->
+				<!-- #section:basics/sidebar.layout.minimize -->
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
 					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>				</div>
 
@@ -197,7 +196,7 @@ $totalRows_countclients2 = mysqli_num_rows($countclients2);?><!DOCTYPE html>
 							<!-- <form class="form-search">
 								<span class="input-icon">
 									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="ace-icon fa fa-search nav-search-icon"></i>								</span>
+									<i class="ace-icon fa fa-search nav-search-icon"></i></span>
 							</form> -->
 						</div><!-- /.nav-search -->
 
@@ -206,15 +205,15 @@ $totalRows_countclients2 = mysqli_num_rows($countclients2);?><!DOCTYPE html>
 
 					<!-- /section:basics/content.breadcrumbs -->
 					<div class="page-content">
-						
-
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
 								Dashboard
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									Overview & Statistics							</small>							</h1>
+									Overview & Statistics
+								</small>
+							</h1>
 						</div><!-- /.page-header -->
 
 						<div class="row">
@@ -222,27 +221,28 @@ $totalRows_countclients2 = mysqli_num_rows($countclients2);?><!DOCTYPE html>
 								<!-- PAGE CONTENT BEGINS -->
 								<div class="alert alert-block alert-success">
 									<button type="button" class="close" data-dismiss="alert">
-										<i class="ace-icon fa fa-times"></i>									</button>
+										<i class="ace-icon fa fa-times"></i>
+									</button>
 
 									<i class="ace-icon fa fa-check green"></i>
 
 									Welcome to
 									<strong class="green">
 										Peleza Admin
-										<small>(v1.0.0)</small>									</strong>,
-	your access and activity is strictly monitored <a href="#">read terms and conditions</a> of access.								</div>
+										<small>(v1.0.0)</small>
+									</strong>,
+									your access and activity is strictly monitored <a href="#">read terms and conditions</a> of access.
+								</div>
 
 								<div class="row">
 									<div class="space-6"></div>
 
 									<div class="col-sm-12 infobox-container">
 										<!-- #section:pages/dashboard.infobox -->
-                                        <?php
-										
-if (in_array('VIEW_DASHBOARD_REPORTS_MODULES', $roledata)) 
-{
+                    <?php
+										if (in_array('VIEW_DASHBOARD_REPORTS_MODULES', $roledata)) {
 										?>
-													<div class="infobox infobox-green">
+										<div class="infobox infobox-green">
 											<div class="infobox-progress">
 												<!-- #section:pages/dashboard.infobox.easypiechart -->
 												<div class="easy-pie-chart percentage" data-percent="<?php 
@@ -273,133 +273,46 @@ if (in_array('VIEW_DASHBOARD_REPORTS_MODULES', $roledata))
 
 												<div class="infobox-content">
 													<span class="bigger-110">~</span>
-											Institutions											</div>
+													Institutions
+												</div>
 											</div>
 										</div>
-<?php
-}
-?>
-  <?php
-  if (in_array('VIEW_DASHBOARD_REPORTS_CLIENTS', $roledata)) 
-{
-									
+										<?php
+										}
+										if (in_array('VIEW_DASHBOARD_REPORTS_CLIENTS', $roledata)) {
+											?>
+											<div class="infobox infobox-blue">
+												<div class="infobox-progress">
+													<!-- #section:pages/dashboard.infobox.easypiechart -->
+													<div class="easy-pie-chart percentage" data-percent="<?php 
+														if($row_countclients['COUNT_CLIENTS']=='0') {
+															echo "0";
+														} else {
+															echo round($totalRows_countclients2/$row_countclients['COUNT_CLIENTS']*100, 0); 
+														}?>" data-size="46">
+														<span class="percent">
+															<?php
+															if($row_countclients['COUNT_CLIENTS']=='0') {
+																echo "0";
+															} else {
+																echo round($totalRows_countclients2/$row_countclients['COUNT_CLIENTS']*100, 0); 
+															}
+															?>
+														</span>%												
+													</div>
+													<!-- /section:pages/dashboard.infobox.easypiechart -->
+												</div>
+												<div class="infobox-data">
+													<span class="infobox-text">Clients</span>
+													<div class="infobox-content">
+														<span class="bigger-110">~</span>
+														With Searches
+													</div>
+												</div>
+											</div>
+											<?php
+										}
 										?>
-												<div class="infobox infobox-blue">
-											<div class="infobox-progress">
-												<!-- #section:pages/dashboard.infobox.easypiechart -->
-												<div class="easy-pie-chart percentage" data-percent="<?php 
-												if($row_countclients['COUNT_CLIENTS']=='0')
-												{
-												echo "0";
-												}
-												else
-												{
-												
-												echo round($totalRows_countclients2/$row_countclients['COUNT_CLIENTS']*100, 0); 
-												
-												}?>" data-size="46">
-													<span class="percent"><?php 	if($row_countclients['COUNT_CLIENTS']=='0')
-												{
-												echo "0";
-												}
-												else
-												{
-												
-												echo round($totalRows_countclients2/$row_countclients['COUNT_CLIENTS']*100, 0); 
-												
-												}?></span>%												</div>
-
-												<!-- /section:pages/dashboard.infobox.easypiechart -->
-											</div>
-
-											<div class="infobox-data">
-												<span class="infobox-text">Clients</span>
-
-												<div class="infobox-content">
-													<span class="bigger-110">~</span>
-													With Searches												</div>
-											</div>
-										</div>
-<?php
-}
-?>
-												<!--<div class="infobox infobox-pink">
-											<div class="infobox-progress">
-							
-												<div class="easy-pie-chart percentage" data-percent="42" data-size="46">
-													<span class="percent">42</span>%												</div>
-
-						
-											</div>
-
-											<div class="infobox-data">
-												<span class="infobox-text">traffic used</span>
-
-												<div class="infobox-content">
-													<span class="bigger-110">~</span>
-													58GB remaining												</div>
-											</div>
-										</div>
-
-
-											<div class="infobox infobox-red">
-											<div class="infobox-progress">
-												
-												<div class="easy-pie-chart percentage" data-percent="42" data-size="46">
-													<span class="percent">42</span>%												</div>
-
-								
-											</div>
-
-											<div class="infobox-data">
-												<span class="infobox-text">traffic used</span>
-
-												<div class="infobox-content">
-													<span class="bigger-110">~</span>
-													58GB remaining												</div>
-											</div>
-										</div>
-
-
-												<div class="infobox infobox-orange2">
-											<div class="infobox-progress">
-							
-												<div class="easy-pie-chart percentage" data-percent="42" data-size="46">
-													<span class="percent">42</span>%												</div>
-
-									
-											</div>
-
-											<div class="infobox-data">
-												<span class="infobox-text">traffic used</span>
-
-												<div class="infobox-content">
-													<span class="bigger-110">~</span>
-													58GB remaining												</div>
-											</div>
-										</div>
-
-
-										<div class="infobox infobox-blue2">
-											<div class="infobox-progress">
-						
-												<div class="easy-pie-chart percentage" data-percent="42" data-size="46">
-													<span class="percent">42</span>%												</div>
-
-										
-											</div>
-
-											<div class="infobox-data">
-												<span class="infobox-text">traffic used</span>
-
-												<div class="infobox-content">
-													<span class="bigger-110">~</span>
-													58GB remaining												</div>
-											</div>
-										</div>
-
-									</div>-->
-
 									<div class="vspace-12-sm"></div>
 								</div><!-- /.row -->
 
@@ -408,98 +321,108 @@ if (in_array('VIEW_DASHBOARD_REPORTS_MODULES', $roledata))
 
 								<!-- /section:custom/extra.hr -->
 								<div class="row">
-                                
-                                
-                                 <?php
-								  if (in_array('VIEW_DASHBOARD_REPORTS_SEARCHES', $roledata)) 
-{
-									
+									<?php
+								  if (in_array('VIEW_DASHBOARD_REPORTS_SEARCHES', $roledata)) {
 										?>
-									<div class="col-sm-6">
-										<div class="widget-box transparent">
-											<div class="widget-header widget-header-flat">
-												<h4 class="widget-title lighter">
-													<i class="ace-icon fa fa-star orange"></i>
-													Popular Clients With Searches										</h4>
+										<div class="col-sm-6">
+											<div class="widget-box transparent">
+												<div class="widget-header widget-header-flat">
+													<h4 class="widget-title lighter">
+														<i class="ace-icon fa fa-star orange"></i>
+														Popular Clients With Searches	
+													</h4>
 
-												<div class="widget-toolbar">
-													<a href="#" data-action="collapse">
-														<i class="ace-icon fa fa-chevron-up"></i>													</a>												</div>
-											</div>
+													<div class="widget-toolbar">
+														<a href="#" data-action="collapse">
+															<i class="ace-icon fa fa-chevron-up"></i>
+														</a>											
+													</div>
+												</div>
 
-											<div class="widget-body">
-												<div class="widget-main no-padding">
-													<table class="table table-bordered table-striped">
-														<thead class="thin-border-bottom">
-															<tr>
-																<th>
-																	<i class="ace-icon fa fa-caret-right blue"></i>Name															</th>
+												<div class="widget-body">
+													<div class="widget-main no-padding">
+														<table class="table table-bordered table-striped">
+															<thead class="thin-border-bottom">
+																<tr>
+																	<th>
+																		<i class="ace-icon fa fa-caret-right blue"></i>Name
+																	</th>
 
-																<th>
-																	<i class="ace-icon fa fa-caret-right blue"></i>Searches																</th>
-															</tr>
-														</thead>
+																	<th>
+																		<i class="ace-icon fa fa-caret-right blue"></i>Searches
+																	</th>
+																</tr>
+															</thead>
 
-														<tbody>
-															<?php do { ?>
-															  <tr>
-															    <td><?php echo $row_get5topclients['client_name']; ?></td>
-															    <td>
-															      <small>
-															        <b class="blue"><?php echo $row_get5topclients['COUNT_CLIENT']; ?></s>																	</small>															      </td>
-														      </tr>
-															  <?php } while ($row_get5topclients = mysqli_fetch_assoc($get5topclients)); ?>
-													  </tbody>
-													</table>
-												</div><!-- /.widget-main -->
-											</div><!-- /.widget-body -->
-										</div><!-- /.widget-box -->
-									</div><!-- /.col -->
+															<tbody>
+																<?php do { ?>
+																	<tr>
+																		<td><?php echo $row_get5topclients['client_name']; ?></td>
+																		<td>
+																			<small>
+																				<b class="blue"><?php echo $row_get5topclients['COUNT_CLIENT']; ?></s>
+																			</small>
+																		</td>
+																		</tr>
+																	<?php } while ($row_get5topclients = mysqli_fetch_assoc($get5topclients)); ?>
+															</tbody>
+														</table>
+													</div><!-- /.widget-main -->
+												</div><!-- /.widget-body -->
+											</div><!-- /.widget-box -->
+										</div><!-- /.col -->
 
-									<div class="col-sm-6">
-										<div class="widget-box transparent">
-											<div class="widget-header widget-header-flat">
-												<h4 class="widget-title lighter">
-													<i class="ace-icon fa fa-star orange"></i>
-													Popular Searched Institutions										</h4>
+										<div class="col-sm-6">
+											<div class="widget-box transparent">
+												<div class="widget-header widget-header-flat">
+													<h4 class="widget-title lighter">
+														<i class="ace-icon fa fa-star orange"></i>
+														Popular Searched Institutions
+													</h4>
 
-												<div class="widget-toolbar">
-													<a href="#" data-action="collapse">
-														<i class="ace-icon fa fa-chevron-up"></i>													</a>												</div>
-											</div>
+													<div class="widget-toolbar">
+														<a href="#" data-action="collapse">
+															<i class="ace-icon fa fa-chevron-up"></i>
+														</a>
+													</div>
+												</div>
 
-											<div class="widget-body">
-												<div class="widget-main no-padding">
-													<table class="table table-bordered table-striped">
-														<thead class="thin-border-bottom">
-															<tr>
-																<th>
-																	<i class="ace-icon fa fa-caret-right blue"></i>Name															</th>
+												<div class="widget-body">
+													<div class="widget-main no-padding">
+														<table class="table table-bordered table-striped">
+															<thead class="thin-border-bottom">
+																<tr>
+																	<th>
+																		<i class="ace-icon fa fa-caret-right blue"></i>Name
+																	</th>
 
-																<th>
-																	<i class="ace-icon fa fa-caret-right blue"></i>Searches																</th>
-															</tr>
-														</thead>
+																	<th>
+																		<i class="ace-icon fa fa-caret-right blue"></i>Searches
+																	</th>
+																</tr>
+															</thead>
 
-														<tbody>
-															<?php do { ?>
-															  <tr>
-															    <td><?php echo $row_get5topinstitutions['institution_name']; ?></td>
-															    <td>
-															      <small>
-															        <b class="red"><?php echo $row_get5topinstitutions['COUNT_INSTITUTION']; ?></s>																	</small>															      </td>
-														      </tr>
-															  <?php } while ($row_get5topinstitutions = mysqli_fetch_assoc($get5topinstitutions)); ?>
-													  </tbody>
-													</table>
-												</div><!-- /.widget-main -->
-											</div><!-- /.widget-body -->
-										</div><!-- /.widget-box -->
-									</div><!-- /.col -->
+															<tbody>
+																<?php do { ?>
+																	<tr>
+																		<td><?php echo $row_get5topinstitutions['institution_name']; ?></td>
+																		<td>
+																			<small>
+																				<b class="red"><?php echo $row_get5topinstitutions['COUNT_INSTITUTION']; ?></s>
+																			</small>															      
+																		</td>
+																	</tr>
+																<?php } while ($row_get5topinstitutions = mysqli_fetch_assoc($get5topinstitutions)); ?>
+															</tbody>
+														</table>
+													</div><!-- /.widget-main -->
+												</div><!-- /.widget-body -->
+											</div><!-- /.widget-box -->
+										</div><!-- /.col -->
+										<?php
+									}
+									?>
 								</div><!-- /.row -->
-<?php
-}
-?>
 								<div class="hr hr32 hr-dotted"></div>
 							</div><!-- /.col -->
 						</div><!-- /.row -->
@@ -513,10 +436,10 @@ if (in_array('VIEW_DASHBOARD_REPORTS_MODULES', $roledata))
 					<div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder">Peleza</span>
-							Admin &copy; 2018						</span>
-
-&nbsp;&nbsp;											</div>
-
+							Admin &copy; 2018	
+						</span>
+						&nbsp;&nbsp;
+					</div>
 					<!-- /section:basics/footer -->
 				</div>
 			</div>
@@ -534,10 +457,10 @@ if (in_array('VIEW_DASHBOARD_REPORTS_MODULES', $roledata))
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
+		<script type="text/javascript">
+		window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
+		</script>
+		<![endif]-->
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='../../assets/js/jquery.mobile.custom.js'>"+"<"+"/script>");
 		</script>

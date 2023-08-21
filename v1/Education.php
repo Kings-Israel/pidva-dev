@@ -20,7 +20,7 @@ class Education
         $this->db = new DB();
         $configs = parse_ini_file("config/config.ini", true);
         $configs = json_decode(json_encode($configs));
-        $this->logger = new MenuLogger($configs->log);
+        // $this->logger = new MenuLogger($configs->log);
     }
 
     public function token(){
@@ -55,7 +55,7 @@ class Education
 
         $sql = "SELECT course_id,course_name,course_code,faculty_name FROM pel_edu_courses WHERE faculty_name = :faculty_name ORDER BY course_name ASC ";
 
-        $this->logger->INFO("GOT sql $sql :faculty_name $faculty_name ");
+        // $this->logger->INFO("GOT sql $sql :faculty_name $faculty_name ");
 
         $dt = $this->db->fetch($sql,[':faculty_name'=>$faculty_name]);
 
@@ -315,7 +315,7 @@ class Education
         }
         catch (Exception $e)
         {
-            $this->logger->ERROR(__FUNCTION__." Error: $countQuery " .$e->getMessage()." trace ".$e->getTraceAsString());
+            // $this->logger->ERROR(__FUNCTION__." Error: $countQuery " .$e->getMessage()." trace ".$e->getTraceAsString());
             return false;
         }
 
@@ -366,7 +366,7 @@ class Education
         }
         catch (Exception $e) {
 
-            $this->logger->ERROR(__FUNCTION__." SQL: $sql \n params ".json_encode($params)."\n Error " .$e->getMessage()." trace ".$e->getTraceAsString());
+            // $this->logger->ERROR(__FUNCTION__." SQL: $sql \n params ".json_encode($params)."\n Error " .$e->getMessage()." trace ".$e->getTraceAsString());
             return false;
         }
 
@@ -409,7 +409,8 @@ class Education
             return array_merge($post,$get,(array)$json);
         }
 
-        return isset($post[$name]) ? $post[$name] : isset($get[$name]) ? $get[$name] : isset($json->$name) ? $json->$name :false;
+        // return isset($post[$name]) ? $post[$name] : isset($get[$name]) ? $get[$name] : isset($json->$name) ? $json->$name :false;
+        return ((isset($post[$name]) ? $post[$name] : isset($get[$name])) ? $get[$name] : isset($json->$name)) ? $json->$name : false;
 
     }
 
