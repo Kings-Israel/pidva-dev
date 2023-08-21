@@ -18,7 +18,7 @@ class Vehicle
         $this->db = new DB();
         $configs = parse_ini_file("config/config.ini", true);
         $configs = json_decode(json_encode($configs));
-        $this->logger = new MenuLogger($configs->log);
+        // $this->logger = new MenuLogger(s$configs->log);
     }
 
     /**
@@ -394,7 +394,7 @@ class Vehicle
         }
         catch (Exception $e)
         {
-            $this->logger->ERROR(__FUNCTION__." Error: $countQuery " .$e->getMessage()." trace ".$e->getTraceAsString());
+            // $this->logger->ERROR(__FUNCTION__." Error: $countQuery " .$e->getMessage()." trace ".$e->getTraceAsString());
             return false;
         }
 
@@ -445,7 +445,7 @@ class Vehicle
         }
         catch (Exception $e) {
 
-            $this->logger->ERROR(__FUNCTION__." SQL: $sql \n params ".json_encode($params)."\n Error " .$e->getMessage()." trace ".$e->getTraceAsString());
+            // $this->logger->ERROR(__FUNCTION__." SQL: $sql \n params ".json_encode($params)."\n Error " .$e->getMessage()." trace ".$e->getTraceAsString());
             return false;
         }
 
@@ -488,7 +488,8 @@ class Vehicle
             return array_merge($post,$get,(array)$json);
         }
 
-        return isset($post[$name]) ? $post[$name] : isset($get[$name]) ? $get[$name] : isset($json->$name) ? $json->$name :false;
+        // return isset($post[$name]) ? $post[$name] : isset($get[$name]) ? $get[$name] : isset($json->$name) ? $json->$name :false;
+        return ((isset($post[$name]) ? $post[$name] : isset($get[$name])) ? $get[$name] : isset($json->$name)) ? $json->$name : false;
 
     }
 

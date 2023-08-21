@@ -33,13 +33,12 @@ if (!function_exists("GetSQLValueString")) {
 $get_help_items_query = 'SELECT * FROM main_helpsubject s
 													INNER JOIN pel_client c ON c.client_id = s.user_id 
 													INNER JOIN main_helpmessage m ON s.id = m.subject_id
-													GROUP BY s.subject
+													GROUP BY s.id
 													ORDER BY s.created_at DESC';
 
 mysqli_select_db($connect, $database_connect);
 $get_help_items = mysqli_query_ported($get_help_items_query, $connect) or die(mysqli_error($connect));
 $help_item = mysqli_fetch_assoc($get_help_items);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -225,7 +224,7 @@ $help_item = mysqli_fetch_assoc($get_help_items);
 															<?php echo $help_item['message'] ?>
 														</td>
 														<td>
-															<a href="/html/help/details.php?id=<?php echo $help_item['id']; ?>" class="green">
+															<a href="/html/help/details.php?id=<?php echo $help_item['subject_id']; ?>" class="green">
 																<button class="btn btn-xs btn-primary">
 																	<i class="ace-icon fa fa-eye bigger-130"></i> View Details
 																</button>
@@ -558,76 +557,6 @@ $help_item = mysqli_fetch_assoc($get_help_items);
 
 		})
 	</script>
-
-	<!-- the following scripts are used in demo only for onpage help and you don't need them -->
-	<link rel="stylesheet" href="../../assets/css/ace.onpage-help.css" />
-	<link rel="stylesheet" href="../../docs/assets/js/themes/sunburst.css" />
-
-	<script type="text/javascript">
-		ace.vars['base'] = '..';
-	</script>
-	<script src="../../assets/js/ace/elements.onpage-help.js"></script>
-	<script src="../../assets/js/ace/ace.onpage-help.js"></script>
-	<script src="../../docs/assets/js/rainbow.js"></script>
-	<script src="../../docs/assets/js/language/generic.js"></script>
-	<script src="../../docs/assets/js/language/html.js"></script>
-	<script src="../../docs/assets/js/language/css.js"></script>
-	<script src="../../docs/assets/js/language/javascript.js"></script>
-
-	<script type="text/javascript">
-		<!--
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytextfield1", "none", {
-			validateOn: ["change"]
-		});
-		var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytextfield2", "none", {
-			validateOn: ["change"]
-		});
-		var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytextfield3", "none", {
-			validateOn: ["change"]
-		});
-		var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytextfield4", "none", {
-			validateOn: ["change"]
-		});
-		var sprytextfield5 = new Spry.Widget.ValidationTextField("sprytextfield5", "none", {
-			validateOn: ["change"]
-		});
-		var sprytextfield6 = new Spry.Widget.ValidationTextField("sprytextfield6", "none", {
-			validateOn: ["change"]
-		});
-		var sprytextfield7 = new Spry.Widget.ValidationTextField("sprytextfield7", "none", {
-			validateOn: ["change"]
-		});
-		var sprytextfield8 = new Spry.Widget.ValidationTextField("sprytextfield8", "none", {
-			validateOn: ["change"]
-		});
-		var sprytextfield9 = new Spry.Widget.ValidationTextField("sprytextfield9", "integer", {
-			validateOn: ["change"]
-		});
-
-		var spryselect1 = new Spry.Widget.ValidationSelect("spryselect1", {
-			invalidValue: "000",
-			validateOn: ["change"]
-		});
-		var spryselect2 = new Spry.Widget.ValidationSelect("spryselect2", {
-			invalidValue: "000",
-			validateOn: ["change"]
-		});
-
-
-
-		//
-		-->
-	</script>
 </body>
 
 </html>
-<?php
-mysqli_free_result($getusers);
-
-mysqli_free_result($getprofile);
-
-mysqli_free_result($getprofile4);
-
-
-
-?>

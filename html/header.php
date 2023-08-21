@@ -1,10 +1,12 @@
-<?php require_once('/var/www/html/pidva/Connections/connect.php'); ?>
+<?php 
+require_once('C:/xampp/htdocs/projects/pidva-dev/Connections/connect.php'); 
+// require_once('/var/www/html/pidva-dev/Connections/connect.php'); 
+?>
 <?php
 //initialize the session
 if (!isset($_SESSION)) {
 	session_start();
 }
-
 
 // ** Logout the current user. **
 $logoutAction = $_SERVER['PHP_SELF'] . "?doLogout=true";
@@ -23,15 +25,12 @@ if ((isset($_GET['doLogout'])) && ($_GET['doLogout'] == "true")) {
 	mysqli_select_db($connect, $database_connect);
 	$Result1 = mysqli_query_ported($updateSQL, $connect) or die(mysqli_error($connect));
 
-
 	$_SESSION['MM_Username'] = NULL;
 	$_SESSION['MM_UserGroup'] = NULL;
 	$_SESSION['PrevUrl'] = NULL;
 	unset($_SESSION['MM_Username']);
 	unset($_SESSION['MM_UserGroup']);
 	unset($_SESSION['PrevUrl']);
-
-
 
 	$logoutGoTo = "../../index.php";
 	if ($logoutGoTo) {
@@ -89,7 +88,6 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("", $MM_authorizedUsers
 	<meta http-equiv="Refresh" content="10000; url=../../index.php">
 
 	<?php
-
 }
 	?><?php
 		if (!function_exists("GetSQLValueString")) {
@@ -121,8 +119,6 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("", $MM_authorizedUsers
 			}
 		}
 
-
-
 		$checkid = $_SESSION['MM_Username'];
 
 		mysqli_select_db($connect, $database_connect);
@@ -141,19 +137,19 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("", $MM_authorizedUsers
 		$profileid = $_SESSION['MM_USR_PROFILE'];
 		mysqli_select_db($connect, $database_connect);
 		$query_roles = "SELECT
-pel_profile_roles.pr_id,
-pel_profile_roles.profile_id,
-pel_profile_roles.role_id,
-pel_profile_roles.role_code,
-pel_profile_roles.role_name,
-pel_profile_roles.profile_name,
-pel_profile_roles.role_cat,
-pel_profile_roles.`status`,
-pel_profile.`status`
-FROM
-pel_profile_roles
-Inner Join pel_profile ON pel_profile.profile_id = pel_profile_roles.profile_id
-WHERE pel_profile_roles.profile_id='$profileid' and pel_profile_roles.status='11' and pel_profile.status='11' ";
+		pel_profile_roles.pr_id,
+		pel_profile_roles.profile_id,
+		pel_profile_roles.role_id,
+		pel_profile_roles.role_code,
+		pel_profile_roles.role_name,
+		pel_profile_roles.profile_name,
+		pel_profile_roles.role_cat,
+		pel_profile_roles.`status`,
+		pel_profile.`status`
+		FROM
+		pel_profile_roles
+		Inner Join pel_profile ON pel_profile.profile_id = pel_profile_roles.profile_id
+		WHERE pel_profile_roles.profile_id='$profileid' and pel_profile_roles.status='11' and pel_profile.status='11' ";
 		$roles = mysqli_query_ported($query_roles, $connect) or die(mysqli_error($connect));
 		$row_roles = mysqli_fetch_assoc($roles);
 		$totalRows_roles = mysqli_num_rows($roles);
@@ -165,9 +161,7 @@ WHERE pel_profile_roles.profile_id='$profileid' and pel_profile_roles.status='11
 			$i++;
 		} while ($row_roles = mysqli_fetch_assoc($roles));
 
-
 		mysqli_free_result($roles);
-
 
 		$countclient = 0;
 		$countpay = 0;
@@ -203,8 +197,6 @@ WHERE pel_profile_roles.profile_id='$profileid' and pel_profile_roles.status='11
 			$countusers = $row_countunverified['COUNT(USR_ID)'];
 			mysqli_free_result($countunverified);
 		}
-
-
 ?>
 <script src="../../SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
 <script src="../../SpryAssets/SpryValidationSelect.js" type="text/javascript"></script>
@@ -225,35 +217,23 @@ WHERE pel_profile_roles.profile_id='$profileid' and pel_profile_roles.status='11
 			<!-- #section:basics/navbar.layout.brand -->
 			<a href="../dashboard/dashboard.php" class="navbar-brand"><img src="../../assets/images/PelezaLogo.png" height="41px">
 			</a>
-
 			<!-- /section:basics/navbar.toggle -->
 		</div>
-
-
 		<!-- #section:basics/navbar.dropdown -->
 		<div class="navbar-buttons navbar-header pull-right" role="navigation">
 			<ul class="nav ace-nav">
-
 				<li>
-
 					<!--	<img class="nav-user-photo" src="../../assets/avatars/user.jpg" alt="Jason's Photo" />-->
 					<button class="btn btn-white btn-purple btn-bold">
 						<i class="ace-icon fa fa-key bigger-120 purple"></i>
 						Profile: <?php echo $_SESSION['MM_USR_PROFILE_NAME']; ?>
 					</button>
-
 				</li>
-
-
 				<li class="green">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 						<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
 						<span class="badge badge-important"><?php echo ($countclient + $countpay + $countusers); ?></span> </a>
-
 					<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-
-
-
 						<li class="dropdown-header">
 							<i class="ace-icon fa fa-exclamation-triangle"></i>
 							<?php echo ($countclient + $countpay + $countusers); ?> Notifications
@@ -276,8 +256,6 @@ WHERE pel_profile_roles.profile_id='$profileid' and pel_profile_roles.status='11
 								?>
 								<?php
 								if (in_array('VIEW_DASHBOARD_REPORTS_PAYMENTS', $roledata)) {
-
-
 								?>
 									<li>
 										<a href="../payments/education.php">
@@ -294,8 +272,6 @@ WHERE pel_profile_roles.profile_id='$profileid' and pel_profile_roles.status='11
 								?>
 								<?php
 								if (in_array('VIEW_DASHBOARD_REPORTS_USERS', $roledata)) {
-
-
 								?>
 									<li>
 										<a href="../user/users.php">
@@ -310,10 +286,8 @@ WHERE pel_profile_roles.profile_id='$profileid' and pel_profile_roles.status='11
 								<?php
 								}
 								?>
-
 							</ul>
 						</li>
-
 						<li class="dropdown-footer">
 							<a href="#">
 								See all notifications
@@ -321,8 +295,6 @@ WHERE pel_profile_roles.profile_id='$profileid' and pel_profile_roles.status='11
 						</li>
 					</ul>
 				</li>
-
-
 
 				<!-- #section:basics/navbar.user_menu -->
 				<li class="light-blue">
@@ -334,28 +306,19 @@ WHERE pel_profile_roles.profile_id='$profileid' and pel_profile_roles.status='11
 
 						<i class="ace-icon fa fa-caret-down"></i>
 					</a>
-
 					<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-
 						<?php
 						if (in_array('VIEW_MY_PROFILE', $roledata) || in_array('SUPER_USER', $roledata)) {
-
-
 						?>
-
 							<li>
 								<a href="../user/profile.php">
 									<i class="ace-icon fa fa-user"></i>
 									Profile </a>
 							</li>
-
 						<?php
 						}
 						?>
-
-
 						<li class="divider"></li>
-
 						<li>
 							<a href="<?php echo $logoutAction ?>">
 								<i class="ace-icon fa fa-power-off"></i>
@@ -363,11 +326,9 @@ WHERE pel_profile_roles.profile_id='$profileid' and pel_profile_roles.status='11
 						</li>
 					</ul>
 				</li>
-
 				<!-- /section:basics/navbar.user_menu -->
 			</ul>
 		</div>
-
 		<!-- /section:basics/navbar.dropdown -->
 	</div><!-- /.navbar-container -->
 </div>
