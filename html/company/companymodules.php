@@ -193,21 +193,6 @@ if (isset($_SERVER['QUERY_STRING'])) {
                                         Registration Data, Enter Request Ref Number (Request Ref Number/Company
                                         Name)</h3>
                                 </div>
-                                <!--   <div  class="col-xs-6">
-                               <h3 align="right" class="header smaller lighter blue">
-                           <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
-                           <a href="educationupload.php">
-                         <button class="btn btn-white btn-info btn-bold">
-                                       <i class="ace-icon bigger-120 green"></i>New Education Data
-</button></a>
-
-
-                                        </h3>
-
-
-
-
-</div>-->
                                 <form class="form-horizontal" name="forminst" action="<?php echo $editFormAction; ?>" method="POST">
 
                                     <div class="form-group">

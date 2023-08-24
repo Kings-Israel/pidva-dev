@@ -10,8 +10,8 @@ ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// $root = "/var/www/html/pidva-dev";
-$root = "C:/xampp/htdocs/projects/pidva-dev";
+$root = "/var/www/html/pidva-dev";
+// $root = "C:/xampp/htdocs/projects/pidva-dev";
 
 require_once "$root/vendor/autoload.php";
 require_once "$root/v1/MenuLogger.php";

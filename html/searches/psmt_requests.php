@@ -63,8 +63,6 @@ if (isset($_SERVER['QUERY_STRING'])) {
 	$editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
 
-
-
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "assignform")) {
 	$updateSQL = sprintf(
 		"UPDATE pel_psmt_request SET verification_status=%s, user_id=%s, user_name=%s, user_lock=%s, user_lock_date=%s WHERE request_id=%s",
@@ -411,10 +409,6 @@ $totalRows_getallsearches = mysqli_num_rows($getallsearches);
 
 												$x = 1;
 												do {
-
-
-
-
 												?>
 													<tr>
 														<td class="center">
@@ -588,8 +582,8 @@ $totalRows_getallsearches = mysqli_num_rows($getallsearches);
 
 																				mysqli_select_db($connect, $database_connect);
 																				$query_getfiles = "SELECT pel_psmt_request.request_id, pel_psmt_files.psmtfile_filetoken,pel_psmt_files.psmtfile_id,pel_psmt_files.psmtfile_name,pel_psmt_files.psmtfile_type,pel_psmt_files.`status`,
-pel_psmt_files.request_id,pel_psmt_files.client_id FROM pel_psmt_request
-Inner Join pel_psmt_files ON pel_psmt_request.file_tracker = pel_psmt_files.psmtfile_filetoken WHERE pel_psmt_request.file_tracker = '$filetracker'";
+													pel_psmt_files.request_id,pel_psmt_files.client_id FROM pel_psmt_request
+													Inner Join pel_psmt_files ON pel_psmt_request.file_tracker = pel_psmt_files.psmtfile_filetoken WHERE pel_psmt_request.file_tracker = '$filetracker'";
 																				$getfiles = mysqli_query_ported($query_getfiles, $connect) or die(mysqli_error($connect));
 																				$row_getfiles = mysqli_fetch_assoc($getfiles);
 																				$totalRows_getfiles = mysqli_num_rows($getfiles);
@@ -603,17 +597,12 @@ Inner Join pel_psmt_files ON pel_psmt_request.file_tracker = pel_psmt_files.psmt
 
 																				<?php
 																				} while ($row_getfiles = mysqli_fetch_assoc($getfiles)); ?>
-
 																			</table>
-
-
 																		</div>
 																		<div class="modal-footer no-margin-top">
 																			<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
 																				<i class="ace-icon fa fa-times"></i>
 																				Close </button>
-
-
 																		</div>
 																	</div>
 																</div>
@@ -631,9 +620,6 @@ Inner Join pel_psmt_files ON pel_psmt_request.file_tracker = pel_psmt_files.psmt
 																		NOTIFY CUSTOMER
 																	</div>
 																</div>
-
-
-
 																<div class="modal-body no-padding">
 																	<form class="form-horizontal" ENCTYPE='multipart/form-data' action='<?php echo $_SERVER["PHP_SELF"]; ?>' method='post'>
 																		<input type="hidden" name="ID" class="col-xs-10 col-sm-5" value="<?php echo $row_getallsearches['request_id']; ?>" />

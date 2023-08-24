@@ -285,8 +285,8 @@ class Course
             return array_merge($post,$get,(array)$json);
         }
 
-        // return isset($post[$name]) ? $post[$name] : isset($get[$name]) ? $get[$name] : isset($json->$name) ? $json->$name :false;
-        return ((isset($post[$name]) ? $post[$name] : isset($get[$name])) ? $get[$name] : isset($json->$name)) ? $json->$name : false;
+        return isset($post[$name]) ? $post[$name] : isset($get[$name]) ? $get[$name] : isset($json->$name) ? $json->$name :false;
+        // return ((isset($post[$name]) ? $post[$name] : isset($get[$name])) ? $get[$name] : isset($json->$name)) ? $json->$name : false;
 
     }
 
