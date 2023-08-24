@@ -888,15 +888,13 @@ if ((isset($_GET['search_id_approve'])) && ($_GET['search_id_approve'] != "")) {
 
 																				<div class="space-10"></div>
 
-
 																				<label class="col-sm-4">Education Level</label>
 
 																				<div class="col-sm-8"><span id="sprytextfield1">
-																						<input type="text" class="form-control" id="education_level" name="education_level" value="<?php $education_level = $row_getdetails['education_level'];
-																																													echo strlen($education_level) > 0 ? $education_level : 'HIGHEST EDUCATION' ?>" required />
-																						<span class="textfieldRequiredMsg">*</span></span></div>
-
-
+																					<input type="text" class="form-control" id="education_level" name="education_level" value="<?php $education_level = $row_getdetails['education_level'];
+																																												echo strlen($education_level) > 0 ? $education_level : 'HIGHEST EDUCATION' ?>" required />
+																					<span class="textfieldRequiredMsg">*</span></span>
+																				</div>
 																				<br />
 																				<div class="space-10"></div>
 
@@ -932,10 +930,8 @@ if ((isset($_GET['search_id_approve'])) && ($_GET['search_id_approve'] != "")) {
 																				<div class="col-sm-8"><span id="sprytextfield4">
 																						<input type="text" class="form-control" value="<?php echo $row_getdetails['specialization_provided']; ?>" id="specialization_provided" name="specialization_provided" required />
 																						<span class="textfieldRequiredMsg">*</span></span></div>
-
 																				<br />
 																				<div class="space-10"></div>
-
 
 																				<label class="col-sm-4">Award Provided</label>
 
@@ -946,55 +942,43 @@ if ((isset($_GET['search_id_approve'])) && ($_GET['search_id_approve'] != "")) {
 																				<br />
 																				<div class="space-10"></div>
 
-
 																				<label class="col-sm-4">Graduation Year Provided</label>
 
 																				<div class="col-sm-7"><span id="sprytextfield5">
 																						<input type="text" class="form-control" value="<?php echo $row_getdetails['year_provided']; ?>" id="year_provided" name="year_provided" required />
 																						<span class="textfieldRequiredMsg">*</span></span></div>
-
 																				<br />
 																				<div class="space-10"></div>
-
 
 																				<label class="col-sm-4">Insitution Country</label>
 
 																				<div class="col-sm-7"><span id="spryselect1">
-																						<select class="form-control" name="country" id="country" data-placeholder="Choose Country...">
-																							<!--     <select name="client_country" id="client_country">-->
-																							<option value="<?php echo $row_getdetails['country']; ?>"><?php echo $row_getdetails['country']; ?></option>
-																							<option value="000"></option>
-																							<?php
-
-
-
-																							$query_getcountries2 = "SELECT * FROM pel_countries ORDER BY country_name ASC";
-																							$getcountries2 = mysqli_query_ported($query_getcountries2, $connect) or die(mysqli_error($connect));
-																							$row_getcountries2 = mysqli_fetch_assoc($getcountries2);
-																							$totalRows_getcountries2 = mysqli_num_rows($getcountries2);
-
-
-
-																							do { ?>
-																								<option value="<?php echo $row_getcountries2['country_name']; ?>"><?php echo $row_getcountries2['country_name']; ?></option>
-																							<?php } while ($row_getcountries2 = mysqli_fetch_assoc($getcountries2)); ?>
-																						</select>
-
-																						<span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*</span></span></div>
+																					<select class="form-control" name="country" id="country" data-placeholder="Choose Country...">
+																						<!--     <select name="client_country" id="client_country">-->
+																						<option value="<?php echo $row_getdetails['country']; ?>"><?php echo $row_getdetails['country']; ?></option>
+																						<option value="000"></option>
+																						<?php
+																						$query_getcountries2 = "SELECT * FROM pel_countries ORDER BY country_name ASC";
+																						$getcountries2 = mysqli_query_ported($query_getcountries2, $connect) or die(mysqli_error($connect));
+																						$row_getcountries2 = mysqli_fetch_assoc($getcountries2);
+																						$totalRows_getcountries2 = mysqli_num_rows($getcountries2);
+																						do { ?>
+																							<option value="<?php echo $row_getcountries2['country_name']; ?>"><?php echo $row_getcountries2['country_name']; ?></option>
+																						<?php } while ($row_getcountries2 = mysqli_fetch_assoc($getcountries2)); ?>
+																					</select>
+																					<span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*</span></span>
+																				</div>
 																				<br />
 																				<div class="space-10"></div>
-
 
 																				<label class="col-sm-4">Data Source</label>
 
 																				<div class="col-sm-7"><span id="sprytextfield8">
-																						<input class="form-control" value="<?php echo $row_getdetails['data_source_provided']; ?>" type="text" id="data_source_provided" name="data_source_provided" />
-																						<span class="textfieldRequiredMsg">*</span></span></div>
-
+																					<input class="form-control" value="<?php echo $row_getdetails['data_source_provided']; ?>" type="text" id="data_source_provided" name="data_source_provided" />
+																					<span class="textfieldRequiredMsg">*</span></span>
+																				</div>
 																				<br />
 																				<div class="space-10"></div>
-
-
 																				<div class="clearfix form-actions">
 																					<div class="col-md-offset-3 col-md-9">
 																						<button onClick="submit" type="submit" value="submit" type="button" class="btn btn-info">
@@ -1002,47 +986,44 @@ if ((isset($_GET['search_id_approve'])) && ($_GET['search_id_approve'] != "")) {
 																							<i class="ace-icon fa fa-check bigger-110"></i>
 																							Save
 																						</button>
-
 																						   
 																						<button class="btn" type="reset">
 																							<i class="ace-icon fa fa-undo bigger-110"></i>
 																							Reset </button>
 																					</div>
 																				</div>
-
 																				<input type="hidden" name="MM_update" value="editdetails">
-
 																			</form>
-
 																		</div>
 																		<div class="modal-footer no-margin-top">
 																			<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
 																				<i class="ace-icon fa fa-times"></i>
-																				Close </button>
-
-
+																				Close
+																			</button>
 																		</div>
 																	</div>
 																</div>
-
 															</div><!-- PAGE CONTENT ENDS -->
 														</td>
-														<td><strong>Data Collected</strong> &nbsp;&nbsp; <?php
-																											if ($row_getdetails['status'] == '11' || $row_getdetails['status'] == '22') {
-																											?>
-																<a href="educationcheck.php?fullnames=<?php echo $_SESSION['MM_full_names'] . "(" . $_SESSION['MM_USR_EMAIL'] . ")"; ?>&status=00&edu_id=<?php echo $row_getdetails['edu_id']; ?>&request_id=<?php echo $colname_getrequestid; ?>&moduleid=<?php echo $colname_getmoduleid; ?>"> <button class="btn btn-xs btn-danger">
-																		<i class="ace-icon fa fa-trash-o bigger-120"></i> </button></a> <?php
-																																	}
-																																	if ($row_getdetails['status'] == '00') {
-
-																																		?>
-																<a href="educationcheck.php?fullnames=<?php echo $_SESSION['MM_full_names'] . "(" . $_SESSION['MM_USR_EMAIL'] . ")"; ?>&status=22&edu_id=<?php echo $row_getdetails['edu_id']; ?>&request_id=<?php echo $colname_getrequestid; ?>&moduleid=<?php echo $colname_getmoduleid; ?>"> <button class="btn btn-xs btn-success">
-																		<i class="ace-icon fa fa-check bigger-120"></i> </button></a>
+														<td>
+															<strong>Data Collected</strong> &nbsp;&nbsp;
 															<?php
-																																	}
-															?><i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i><a href="#modal-checkindb-<?php echo $edu_id ?>" role="button" class="green" data-toggle="modal">
+																if ($row_getdetails['status'] == '11' || $row_getdetails['status'] == '22') {
+																?>
+																	<a href="educationcheck.php?fullnames=<?php echo $_SESSION['MM_full_names'] . "(" . $_SESSION['MM_USR_EMAIL'] . ")"; ?>&status=00&edu_id=<?php echo $row_getdetails['edu_id']; ?>&request_id=<?php echo $colname_getrequestid; ?>&moduleid=<?php echo $colname_getmoduleid; ?>"> <button class="btn btn-xs btn-danger">
+																		<i class="ace-icon fa fa-trash-o bigger-120"></i> </button></a>
+																<?php }
+																if ($row_getdetails['status'] == '00') {
+																	?>
+																	<a href="educationcheck.php?fullnames=<?php echo $_SESSION['MM_full_names'] . "(" . $_SESSION['MM_USR_EMAIL'] . ")"; ?>&status=22&edu_id=<?php echo $row_getdetails['edu_id']; ?>&request_id=<?php echo $colname_getrequestid; ?>&moduleid=<?php echo $colname_getmoduleid; ?>"> <button class="btn btn-xs btn-success">
+																		<i class="ace-icon fa fa-check bigger-120"></i> </button></a>
+																		<?php
+																} ?>
+																<i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i><a href="#modal-checkindb-<?php echo $edu_id ?>" role="button" class="green" data-toggle="modal">
 																<button class="btn btn-xs btn-success">
-																	<i class="ace-icon smaller-80 green"></i>Update Data </button></a>
+																	<i class="ace-icon smaller-80 green"></i>Update Data
+																</button>
+															</a>
 
 															<!-- HERE IS WHERE I WANT -->
 															<div id="modal-checkindb-<?php echo $edu_id ?>" class="modal fade" tabindex="-1">
@@ -1062,14 +1043,11 @@ if ((isset($_GET['search_id_approve'])) && ($_GET['search_id_approve'] != "")) {
 																				<input type="hidden" id="moduleid" name="moduleid" value="<?php echo $colname_getmoduleid; ?>" />
 																				<input type="hidden" id="search_id" name="search_id" value="<?php echo $search_ref; ?>" />
 																				<input type="hidden" id="edu_id" name="edu_id" value="<?php echo $row_getdetails['edu_id']; ?>" />
-
-
 																				<input type="hidden" id="status" name="status" value="44" />
 																				<input type="hidden" id="added_by" name="added_by" value="<?php echo $_SESSION['MM_full_names'] . "(" . $_SESSION['MM_USR_EMAIL'] . ")"; ?>" />
 																				<input type="hidden" id="date_added" name="date_added" value="<?php echo date('Y-m-d H:m:s'); ?>" />
 
 																				<div class="space-10"></div>
-
 
 																				<?php if ($is_negative == 'default') { ?>
 																					<label class="col-sm-4">Enter Student Token</label>
@@ -1079,12 +1057,9 @@ if ((isset($_GET['search_id_approve'])) && ($_GET['search_id_approve'] != "")) {
 																					<br />
 																				<?php } ?>
 
-
-
 																				<div class="space-10"></div>
 
 																				<label class="col-sm-4">Upload Certificate</label>
-
 
 																				<div class="col-sm-8">
 																					<input class="form-control" id="certificate_photo" name="certificate_photo" type="file" />
@@ -1093,7 +1068,7 @@ if ((isset($_GET['search_id_approve'])) && ($_GET['search_id_approve'] != "")) {
 																				<div class="space-10"></div>
 																				<label class="col-sm-4">Comments</label>
 																				<div class="col-sm-12">
-																					<div id="editparent">
+																					<!-- <div id="editparent">
 																						<div id="editControls">
 																							<div class="btn-group">
 																								<a class="btn btn-xs btn-default" data-role="undo" href="#" title="Undo"><i class="fa fa-undo"></i></a>
@@ -1119,14 +1094,13 @@ if ((isset($_GET['search_id_approve'])) && ($_GET['search_id_approve'] != "")) {
 																						</div>
 																						<div id="editor" contenteditable>
 																						</div>
-																						<textarea name="data_notes" id="editorCopy" required="required" style="display:none;"><?php echo isset($row_getdetails['data_notes']) ? $row_getdetails['data_notes'] : '' ?>
-																					</textarea>
-																					</div>
+																						<textarea name="data_notes" id="editorCopy" required="required" style="display:none;"><?php echo isset($row_getdetails['data_notes']) ? $row_getdetails['data_notes'] : '' ?></textarea>
+																					</div> -->
+																					<textarea name="data_notes" required rows="10" cols="130" ><?php echo isset($row_getdetails['data_notes']) ? $row_getdetails['data_notes'] : '' ?></textarea>
 
 																					<br />
 
 																					<div class="space-10"></div>
-
 
 																					<div class="clearfix form-actions">
 																						<div class="col-md-offset-3 col-md-9">
