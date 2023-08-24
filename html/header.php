@@ -1,6 +1,6 @@
 <?php 
-require_once('C:/xampp/htdocs/projects/pidva-dev/Connections/connect.php'); 
-// require_once('/var/www/html/pidva-dev/Connections/connect.php'); 
+// require_once('C:/xampp/htdocs/projects/pidva-dev/Connections/connect.php'); 
+require_once('/var/www/html/pidva-dev/Connections/connect.php'); 
 ?>
 <?php
 //initialize the session
