@@ -570,7 +570,6 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                                 <?php
 
                                                 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formc")) {
-
                                                     $adverse_status_name = $_POST["adverse_status_name"];
                                                     $requestref = $_POST["requestref"];
                                                     $deleteSQL = sprintf("UPDATE pel_psmt_request SET adverse_status=%s WHERE request_ref_number=%s",
@@ -614,10 +613,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                         <thead>
                                         <tr>
                                             <th>BG SCREENING MODULES</th>
-
                                             <th>Files Uploaded</th>
                                             <th>Data Provisions</th>
-
                                         </thead>
 
                                         <tbody>
@@ -631,14 +628,14 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
 
                                                     mysqli_select_db($connect, $database_connect);
                                                     $query_getprogress2 = sprintf("SELECT
-pel_module.module_role,
-pel_psmt_request_modules.`status`,
-pel_psmt_request_modules.request_ref_number,
-pel_psmt_request_modules.module_name,
-pel_psmt_request_modules.module_id
-FROM
-pel_module
-Inner Join pel_psmt_request_modules ON pel_psmt_request_modules.module_id = pel_module.module_id WHERE pel_psmt_request_modules.request_ref_number = %s ORDER BY pel_psmt_request_modules.`status` DESC", GetSQLValueString($refnumber, "text"));
+                                                                                    pel_module.module_role,
+                                                                                    pel_psmt_request_modules.`status`,
+                                                                                    pel_psmt_request_modules.request_ref_number,
+                                                                                    pel_psmt_request_modules.module_name,
+                                                                                    pel_psmt_request_modules.module_id
+                                                                                    FROM
+                                                                                    pel_module
+                                                                                    Inner Join pel_psmt_request_modules ON pel_psmt_request_modules.module_id = pel_module.module_id WHERE pel_psmt_request_modules.request_ref_number = %s ORDER BY pel_psmt_request_modules.`status` DESC", GetSQLValueString($refnumber, "text"));
                                                     $getprogress2 = mysqli_query_ported($query_getprogress2, $connect) or die(mysqli_error($connect));
                                                     $row_getprogress2 = mysqli_fetch_assoc($getprogress2);
                                                     $totalRows_getprogress2 = mysqli_num_rows($getprogress2);
@@ -708,8 +705,8 @@ Inner Join pel_psmt_request_modules ON pel_psmt_request_modules.module_id = pel_
 
                                                     mysqli_select_db($connect, $database_connect);
                                                     $query_getfiles = "SELECT pel_psmt_request.request_id, pel_psmt_files.psmtfile_filetoken,pel_psmt_files.psmtfile_id,pel_psmt_files.psmtfile_name,pel_psmt_files.psmtfile_type,pel_psmt_files.`status`,
-pel_psmt_files.request_id,pel_psmt_files.client_id FROM pel_psmt_request
-Inner Join pel_psmt_files ON pel_psmt_request.file_tracker = pel_psmt_files.psmtfile_filetoken WHERE pel_psmt_request.file_tracker = '$filetracker' and pel_psmt_files.data_type='file'";
+                                                                                pel_psmt_files.request_id,pel_psmt_files.client_id FROM pel_psmt_request
+                                                                                Inner Join pel_psmt_files ON pel_psmt_request.file_tracker = pel_psmt_files.psmtfile_filetoken WHERE pel_psmt_request.file_tracker = '$filetracker' and pel_psmt_files.data_type='file'";
                                                     $getfiles = mysqli_query_ported($query_getfiles, $connect) or die(mysqli_error($connect));
                                                     $row_getfiles = mysqli_fetch_assoc($getfiles);
                                                     $totalRows_getfiles = mysqli_num_rows($getfiles);
