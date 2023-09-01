@@ -5,7 +5,7 @@ if (!function_exists("GetSQLValueString")) {
 	{
 		$theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
 
-		$theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($connect,$theValue) : mysqli_escape_string($connect,$theValue);
+		$theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($connect, $theValue) : mysqli_escape_string($connect, $theValue);
 
 		switch ($theType) {
 			case "text":
@@ -235,7 +235,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 																			</td>
 																			<td><?php echo $row_getstudent['client_name']; ?></td>
 																			<td><?php echo $row_getstudent['request_plan']; ?></td>
-																			<td><?php echo date('Y m d H:i', strtotime($row_getstudent['request_date'])); ?></td>
+																			<td><?php echo date('Y m d H:i', strtotime($row_getstudent['request_date'] . ' + 2 hours')); ?></td>
 																			<td class="hidden-480"> 
 																				<?php 
 																					if($row_getstudent['verification_status']=='44'){
