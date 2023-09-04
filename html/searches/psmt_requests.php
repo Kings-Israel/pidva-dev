@@ -168,7 +168,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 
 mysqli_select_db($connect, $database_connect);
 
-$query_getallsearches = "SELECT * FROM pel_psmt_request WHERE verification_status IN ('44','33','11','00','22') ORDER BY request_date DESC LIMIT 500";
+$query_getallsearches = "SELECT * FROM pel_psmt_request WHERE verification_status IN ('44','33','11','00','22', '55') ORDER BY request_date DESC LIMIT 500";
 $getallsearches = mysqli_query_ported($query_getallsearches, $connect) or die(mysqli_error($connect));
 $row_getallsearches = mysqli_fetch_assoc($getallsearches);
 $totalRows_getallsearches = mysqli_num_rows($getallsearches);
@@ -328,29 +328,34 @@ $totalRows_getallsearches = mysqli_num_rows($getallsearches);
 														<td><?php echo date('Y m d H:i', strtotime($row_getallsearches['request_date'])); ?></td>
 														<td class="hidden-480">
 															<?php
-																if ($row_getallsearches['verification_status'] == '44') {
+																if ($row_getallsearches['status'] == '44') {
 																	?>
 																		<span class="label label-sm label-warning">In Progress</span>
 																	<?php
 																}
-																if ($row_getallsearches['verification_status'] == '00') {
+																if ($row_getallsearches['status'] == '00') {
 																	?>
 																		<span class="label label-sm label-purple">New Request</span>
 																	<?php
 																}
-																if ($row_getallsearches['verification_status'] == '11') {
+																if ($row_getallsearches['status'] == '11') {
 																	?>
 																		<span class="label label-sm label-success">Final</span>
 																	<?php
 																}
-																if ($row_getallsearches['verification_status'] == '33') {
+																if ($row_getallsearches['status'] == '33') {
 																	?>
 																		<span class="label label-sm label-success">Interim</span>
 																	<?php
 																}
-																if ($row_getallsearches['verification_status'] == '22') {
+																if ($row_getallsearches['status'] == '22') {
 																	?>
 																		<span class="label label-sm label-danger">Rejected</span>
+																	<?php
+																}
+																if ($row_getallsearches['status'] == '55') {
+																	?>
+																		<span class="label label-sm label-danger">Invalidated</span>
 																	<?php
 																}
 															?>

@@ -39,7 +39,6 @@ $getrequest = mysqli_query_ported($query_getrequest, $connect) or die(mysqli_err
 $row_getrequest = mysqli_fetch_assoc($getrequest);
 $totalRows_getrequest = mysqli_num_rows($getrequest);
 
-
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -99,7 +98,7 @@ $totalRows_getrequest = mysqli_num_rows($getrequest);
 			<script type="text/javascript">
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
 			</script>
-<?php include('../header2.php');?>
+			<?php include('../header2.php');?>
 		</div>
 
 		<!-- /section:basics/navbar.layout -->
@@ -109,22 +108,19 @@ $totalRows_getrequest = mysqli_num_rows($getrequest);
 			</script>
 
 			<!-- #section:basics/sidebar -->
-			<div id="sidebar" class="sidebar                  responsive">
+			<div id="sidebar" class="sidebar responsive">
 			  <script type="text/javascript">
 					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 				</script>
-              <?php include('../sidebarmenu2.php');?>
-                
-                
-	<!-- #section:basics/sidebar.layout.minimize -->
+				<?php include('../sidebarmenu2.php');?>
+				<!-- #section:basics/sidebar.layout.minimize -->
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>				</div>
-
+					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
 				<!-- /section:basics/sidebar.layout.minimize -->
 			  <script type="text/javascript">
 					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
 				</script>
-				
 		  </div>
 
 			<!-- /section:basics/sidebar -->
@@ -135,26 +131,19 @@ $totalRows_getrequest = mysqli_num_rows($getrequest);
 					  <script type="text/javascript">
 							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
 						</script>
-
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="#">Home</a>							</li>
-
+								<a href="#">Home</a>
+							</li>
 							<li>
-								<a href="#">PSMT Request</a>							</li>
-                               
-                               
+								<a href="#">PSMT Request</a>
+							</li>
 							<li class="active">Upload Repsonse</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
 						<div class="nav-search" id="nav-search">
-							<!-- <form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="ace-icon fa fa-search nav-search-icon"></i>								</span>
-							</form> -->
 						</div><!-- /.nav-search -->
 
 						<!-- /section:basics/content.searchbox -->
@@ -164,284 +153,200 @@ $totalRows_getrequest = mysqli_num_rows($getrequest);
 					<div class="page-content">
 				
 
-<div class="row">
+						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<!--		
-								<div class="hr hr-18 dotted hr-double"></div>
-
-						<h4 class="pink">
-									<i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
-									<a href="#modal-table" role="button" class="green" data-toggle="modal"> Table Inside a Modal Box </a>								</h4>
-
-								<div class="hr hr-18 dotted hr-double"></div>
--->
-<div class="row">
+								<div class="row">
 									<div class="col-xs-12">
-                                    <div  class="col-xs-12">
-                                    
-									  <h3 align="left" class="header smaller lighter blue">PSMT REQUEST REPORT UPLAODER</h3>
-                                      </div>
-                                           <!-- <div  class="col-xs-6">
-                                        <h3 align="right" class="header smaller lighter blue">
-									<i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
-									<a href="filesupload.php">	
-                                  <button class="btn btn-white btn-info btn-bold">
-												<i class="ace-icon bigger-120 green"></i>	 Upload New Data File
-</button></a></h3>   </div>-->
-
-<div class="clearfix">
-										
-					<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-           					<?php
-
-ini_set('max_execution_time', 10000);
-
-//this verify is the file csv upload
-if (isset($_POST['request_ref_number']))  {
-
-if (is_uploaded_file($_FILES['id-input-file-2']['tmp_name'])) {
-/*
-require_once('Connections/conn.php');
-
-$linkdata = mysqli_pconnect("localhost", "root", "mysql")
-or die('Could not connect: ' . mysqli_error($connect));
-
-mysqli_select_db("peleza_db") or die('Could not select database');*/
-
-
-//  $STAFF_ID = $_SESSION['MM_USR_STAFF_ID'];  
-  date_default_timezone_set('Africa/Nairobi');
-$date_insert = date('Y-m-d h:i:s');
-
-   $uploadedby = $_SESSION['MM_full_names'];
-   $USR_ID = $_SESSION['MM_USR_ID']; 
- $request_ref_number = $_POST['request_ref_number'];	
- 
- $request_plan =  $_POST['request_plan'];
- $bg_dataset_name = $_POST['bg_dataset_name'];
- $client_id =  $_POST['client_id'];
- $ID =  $_POST['ID'];
- $notify_by = $_POST['notify_by'];
- $notify_date =  $_POST['notify_date'];
- $status =  $_POST['status'];
-if($status=='11')
-{
-$statuscode = 'FINAL REPORT';
-}
-if($status=='33')
-{
-$statuscode = 'INTERIM REPORT';
-}
- $date_insert2 = date('dmYhis');
-
- 
-  $ext = strtolower(end(explode('.', $_FILES['id-input-file-2']['name'])));
-
- $a = $request_ref_number."_";
- 	  "Upload: ".$a."_". $_FILES["id-input-file-2"]["name"];
-	  $rawname = $_FILES['id-input-file-2']['name'];
- $file="reportfiles/".$a."_". $_FILES["id-input-file-2"]["name"];
-
-    require_once "../../uploads.php";
-    $prefix = "id-input-file-2";
-    $filenameuploaded = uploadFile($prefix,"searches-reportfiles",$a."_".$_FILES[$prefix]["name"]);
-
-$query_getclient = "SELECT * FROM pel_client WHERE client_id='$client_id'";
-$getclient = mysqli_query_ported($query_getclient, $connect) or die(mysqli_error($connect));
-$row_getclient = mysqli_fetch_assoc($getclient);
-$totalRows_getclient = mysqli_num_rows($getclient);
-
-
-$clientname =$row_getclient['client_first_name'];
-$toemail= $row_getclient['client_email_address'];
-
-require ("../../PHPMailer/PHPMailer.php");
-
-require("../../PHPMailer/SMTP.php");
-require("../../PHPMailer/Exception.php");
-
-//$mail = new PHPMailer;
-$mail = new PHPMailer\PHPMailer\PHPMailer();
-
-$mail->isSMTP();   
-//$mail->isMail();                          // Set mailer to use SMTP
-$mail->Host = 'two.deepafrica.com';             // Specify main and backup SMTP servers
-$mail->SMTPAuth = true;                     // Enable SMTP authentication
-$mail->Username = 'verify@edcheckafrica.com';          // SMTP username
-$mail->Password = 'vkr67XpjsBnVkKK5'; // SMTP password
-$mail->SMTPSecure = 'ssl';                  // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 465;                          // TCP port to connect to
-
-$mail->setFrom('verify@edcheckafrica.com', 'Backgorund Checks>> Peleza International');
-
-$mail->addAddress($toemail);
-//$mail->addAddress('omintolbert@gmail.com');   // Add a recipient
-//$mail->addCC('mwendemarita@gmail.com');
-//$mail->addBCC('omintolbert@gmail.com');
-
-$mail->isHTML(true);  // Set email format to HTML
-
-$bodyContent = '<p><img src="https://admin.pidva.africa/assets/images/PelezaLogo.png" width="166" height="60" /></p>
-<p><strong>Hi '.$clientname.',</strong></p>
-<p>The background search report for  '.$bg_dataset_name.' has been uploaded kindly login to view it.</p>
-<p><strong>STATUS :  '.$statuscode.'</strong></p>
-<p><strong><a href="https://psmt.pidva.africa/">LOGIN</a></strong></p>
-<p>  - The Peleza Team<br />
-  Support: +254 796 111 020 or +254  Email:&nbsp;<a href="mailto:verify@peleza.com">verify@peleza.com</a>&nbsp;<br />
-  ® Peleza Int, 2018. All rights reserved. </p>';
-//$bodyContent .= '<p>This is the HTML email sent from localhost using PHP script by <b>CodexWorld</b></p>';
-
-$mail->Subject = 'Confidential Background Check Report';
-$mail->Body    = $bodyContent;
-
-if(!$mail->send()) {
-    echo 'Message could not be sent.';
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-} else {
-    echo 'Message has been sent'; 
-
- 				   $updateSQL = sprintf("UPDATE pel_psmt_request SET status=%s, notify_by=%s, notify_date=%s, report_file=%s  WHERE request_id=%s",
-                       GetSQLValueString($_POST['status'], "text"),
-                       GetSQLValueString($_POST['notify_by'], "text"),
-                       GetSQLValueString($_POST['notify_date'], "text"),
-                       GetSQLValueString($filenameuploaded, "text"),
-					   GetSQLValueString($_POST['ID'], "int"));
-
-  mysqli_select_db($connect,$database_connect);
-  $Result1 = mysqli_query_ported($updateSQL, $connect) or die(mysqli_error($connect));
- 
-  $updateGoTo = "psmt_requests.php";
- ?>
- 
- <div class="alert alert-success"> <h4> REPORT UPLOADED SUCCESFULLY </h4> <p><a href="psmt_requests.php">Go PSMT Requests</a></p></div>
-
-  
-  <?php
-/*  if (isset($_SERVER['QUERY_STRING'])) {
-    $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
-    $updateGoTo .= $_SERVER['QUERY_STRING'];
-  }
-  header(sprintf("Location: %s", $updateGoTo));*/
-  }
-				
- }			
-
-} 
-else {
-
-$editFormAction = $_SERVER['PHP_SELF'];
-if (isset($_SERVER['QUERY_STRING'])) {
-  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
-}
-
-		
-//form to upload
-?>
-  <div> 
- 
-                                
-								 <form class="form-horizontal" ENCTYPE='multipart/form-data' action='<?php echo $_SERVER["PHP_SELF"];?>' method='post'>
-									<!-- #section:elements.form -->
-   <div class="space-4"></div> 
-
-			<hr color="#ff0000" size="2px"> 
-                               
-								
-
-								<div class="space-4"></div>
-                                    
-                                    <div class="form-group">	
-                                    <input type="hidden" id="ID" name="ID"  class="col-xs-10 col-sm-5" value="<?php echo $row_getrequest['request_id']; ?>"/>
-                                    
-                                    <input type="hidden" id="client_id" name="client_id"  class="col-xs-10 col-sm-5" value="<?php echo $row_getrequest['client_id']; ?>"/>
-   
-     <input type="hidden" id="notify_by" name="notify_by"  class="col-xs-10 col-sm-5" value="<?php echo $_SESSION['MM_full_names']; ?>"/>
-       <input type="hidden" id="notify_date" name="notify_date"  class="col-xs-10 col-sm-5" value="<?php echo date('Y-m-d h:i:s'); ?>"/>
-              
-    <!--   <input type="hidden" id="status" name="status"  class="col-xs-10 col-sm-5" value="11"/>
--->
-										
-                                                                <input type="hidden" id="bg_dataset_name" name="bg_dataset_name"  class="col-xs-10 col-sm-5" value="<?php echo $row_getrequest['bg_dataset_name']; ?>"/>
-
-															  <input type="hidden" id="request_plan" name="request_plan"  class="col-xs-10 col-sm-5" value="<?php echo $row_getrequest['request_plan']; ?>"/>
-
-															 <input type="hidden" id="request_ref_number" name="request_ref_number"  class="col-xs-10 col-sm-5" value="<?php echo $row_getrequest['request_ref_number']; ?>"/>
-<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Upload Data File</label>
-									 
-									<div class="col-sm-6">
-										<span id="sprytextfield2">
-																	<input class="col-xs-10 col-sm-5" id="id-input-file-2" name="id-input-file-2" type="file"/>
-															<span class="textfieldRequiredMsg">*</span></span></div>
-								
-									</div>
-                                    
-                                    
-
-  <div class="form-group">	
-              
- 
-		
-<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Report Type</label>
-									 
-									<div class="col-sm-6"><span id="spryselect7">
-									  <label>
-                                      <select class="select form-control" name="status" id="status" required>
-                                      
-                                        <option value="">Choose Report Type</option>
-										   <option value="33">Interim</option>
-														        <option value="11">Final</option>
-                                      </select>
-                                      </label>
-									  <span class="selectInvalidMsg">*.</span>									  </span>
-									</div>
-								
-								   </div>
-
-
-									<div class="space-4"></div>
-									
-
-									<div class="clearfix form-actions">
-										<div class="col-md-offset-3 col-md-9">
-						
-                                   <button onClick="submit" type="submit" value="submit" class="btn btn-info">
-												<i class="ace-icon fa fa-check bigger-110"></i>
-												Submit											</button>
-
-											     
-											<button class="btn" type="reset">
-												<i class="ace-icon fa fa-undo bigger-110"></i>
-												Reset											</button>
+										<div class="col-xs-12">
+									  	<h3 align="left" class="header smaller lighter blue">PSMT REQUEST REPORT UPLAODER</h3>
 										</div>
-									</div>   
-                              
-                              </form>
-                      </div>    
-                      
-                      </div>
-                </div>		
-                        
-                        
-                        
-       <?php
-	   }
-	   ?>                 
-                        
-                        
-                        
+										<div class="clearfix">
+											<div class="row">
+													<div class="col-xs-12">
+														<!-- PAGE CONTENT BEGINS -->
+														<?php
+															ini_set('max_execution_time', 10000);
+
+															// this verify is the file csv upload
+															if (isset($_POST['request_ref_number']))  {
+																if (is_uploaded_file($_FILES['id-input-file-2']['tmp_name'])) {
+																	// $STAFF_ID = $_SESSION['MM_USR_STAFF_ID'];  
+																	date_default_timezone_set('Africa/Nairobi');
+																	$date_insert = date('Y-m-d h:i:s');
+
+																	$uploadedby = $_SESSION['MM_full_names'];
+																	$USR_ID = $_SESSION['MM_USR_ID']; 
+																	$request_ref_number = $_POST['request_ref_number'];	
+																	
+																	$request_plan =  $_POST['request_plan'];
+																	$bg_dataset_name = $_POST['bg_dataset_name'];
+																	$client_id =  $_POST['client_id'];
+																	$ID =  $_POST['ID'];
+																	$notify_by = $_POST['notify_by'];
+																	$notify_date =  $_POST['notify_date'];
+																	$status =  $_POST['status'];
+
+																	if($status == '11') {
+																		$statuscode = 'FINAL REPORT';
+																	}
+																	if($status == '33') {
+																		$statuscode = 'INTERIM REPORT';
+																	}
+																	$date_insert2 = date('dmYhis');
+
+																	$file = $_FILES['id-input-file-2']['name'];
+
+																	$ext = strtolower(end(explode('.', $file)));
+
+																	$a = $request_ref_number."_";
+																	"Upload: ".$a."_". $_FILES["id-input-file-2"]["name"];
+																	$rawname = $_FILES['id-input-file-2']['name'];
+																	$file="reportfiles/".$a."_". $_FILES["id-input-file-2"]["name"];
+
+																	// require_once "../../uploads.php";
+																	$prefix = "id-input-file-2";
+																	$filenameuploaded = uploadFile($prefix,"searches-reportfiles",$a."_".$_FILES[$prefix]["name"]);
+
+																	$query_getclient = "SELECT * FROM pel_client WHERE client_id='$client_id'";
+																	$getclient = mysqli_query_ported($query_getclient, $connect) or die(mysqli_error($connect));
+																	$row_getclient = mysqli_fetch_assoc($getclient);
+																	$totalRows_getclient = mysqli_num_rows($getclient);
+
+																	$clientname =$row_getclient['client_first_name'];
+																	$toemail= $row_getclient['client_email_address'];
+
+																	require ("../../PHPMailer/PHPMailer.php");
+
+																	require("../../PHPMailer/SMTP.php");
+																	require("../../PHPMailer/Exception.php");
+
+																	//$mail = new PHPMailer;
+																	$mail = new PHPMailer\PHPMailer\PHPMailer();
+
+																	$mail->isSMTP();   
+																	//$mail->isMail();                          // Set mailer to use SMTP
+																	$mail->Host = 'two.deepafrica.com';             // Specify main and backup SMTP servers
+																	$mail->SMTPAuth = true;                     // Enable SMTP authentication
+																	$mail->Username = 'verify@edcheckafrica.com';          // SMTP username
+																	$mail->Password = 'vkr67XpjsBnVkKK5'; // SMTP password
+																	$mail->SMTPSecure = 'ssl';                  // Enable TLS encryption, `ssl` also accepted
+																	$mail->Port = 465;                          // TCP port to connect to
+
+																	$mail->setFrom('verify@edcheckafrica.com', 'Backgorund Checks>> Peleza International');
+
+																	$mail->addAddress($toemail);
+																	//$mail->addAddress('omintolbert@gmail.com');   // Add a recipient
+																	//$mail->addCC('mwendemarita@gmail.com');
+																	//$mail->addBCC('omintolbert@gmail.com');
+
+																	$mail->isHTML(true);  // Set email format to HTML
+
+																	$bodyContent = '<p><img src="https://admin.pidva.africa/assets/images/PelezaLogo.png" width="166" height="60" /></p>
+																									<p><strong>Hi '.$clientname.',</strong></p>
+																									<p>The background search report for  '.$bg_dataset_name.' has been uploaded kindly login to view it.</p>
+																									<p><strong>STATUS :  '.$statuscode.'</strong></p>
+																									<p><strong><a href="https://psmt.pidva.africa/">LOGIN</a></strong></p>
+																									<p>  - The Peleza Team<br />
+																										Support: +254 796 111 020 or +254  Email:&nbsp;<a href="mailto:verify@peleza.com">verify@peleza.com</a>&nbsp;<br />
+																										® Peleza Int, 2018. All rights reserved.
+																									</p>';
+																	//$bodyContent .= '<p>This is the HTML email sent from localhost using PHP script by <b>CodexWorld</b></p>';
+
+																	$mail->Subject = 'Confidential Background Check Report';
+																	$mail->Body    = $bodyContent;
+
+																	if(!$mail->send()) {
+																		echo 'Message could not be sent.';
+																		echo 'Mailer Error: ' . $mail->ErrorInfo;
+																	} else {
+																		echo 'Message has been sent'; 
+
+																		$updateSQL = sprintf("UPDATE pel_psmt_request SET status=%s, notify_by=%s, notify_date=%s, report_file=%s  WHERE request_id=%s",
+																								GetSQLValueString($_POST['status'], "text"),
+																								GetSQLValueString($_POST['notify_by'], "text"),
+																								GetSQLValueString($_POST['notify_date'], "text"),
+																								GetSQLValueString($filenameuploaded, "text"),
+																			GetSQLValueString($_POST['ID'], "int"));
+
+																		mysqli_select_db($connect,$database_connect);
+																		$Result1 = mysqli_query_ported($updateSQL, $connect) or die(mysqli_error($connect));
+																	
+																		$updateGoTo = "psmt_requests.php";
+																		?>
+																			<div class="alert alert-success"> <h4> REPORT UPLOADED SUCCESFULLY </h4> <p><a href="psmt_requests.php">Go PSMT Requests</a></p></div>
+																		<?php
+																	}
+																}			
+															} else {
+																$editFormAction = $_SERVER['PHP_SELF'];
+																if (isset($_SERVER['QUERY_STRING'])) { $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']); }
+																?>
+																	<div> 
+																		<form class="form-horizontal" ENCTYPE='multipart/form-data' action='<?php echo $_SERVER["PHP_SELF"];?>' method='post'>
+																			<!-- #section:elements.form -->
+																			<div class="space-4"></div> 
+																			<hr color="#ff0000" size="2px"> 
+																			<div class="space-4"></div>
+																			<div class="form-group">	
+																				<input type="hidden" id="ID" name="ID"  class="col-xs-10 col-sm-5" value="<?php echo $row_getrequest['request_id']; ?>"/>
+																				<input type="hidden" id="client_id" name="client_id"  class="col-xs-10 col-sm-5" value="<?php echo $row_getrequest['client_id']; ?>"/>
+																				<input type="hidden" id="notify_by" name="notify_by"  class="col-xs-10 col-sm-5" value="<?php echo $_SESSION['MM_full_names']; ?>"/>
+																				<input type="hidden" id="notify_date" name="notify_date"  class="col-xs-10 col-sm-5" value="<?php echo date('Y-m-d h:i:s'); ?>"/>
+																				<!--<input type="hidden" id="status" name="status"  class="col-xs-10 col-sm-5" value="11"/>-->
+																				<input type="hidden" id="bg_dataset_name" name="bg_dataset_name"  class="col-xs-10 col-sm-5" value="<?php echo $row_getrequest['bg_dataset_name']; ?>"/>
+																				<input type="hidden" id="request_plan" name="request_plan"  class="col-xs-10 col-sm-5" value="<?php echo $row_getrequest['request_plan']; ?>"/>
+																				<input type="hidden" id="request_ref_number" name="request_ref_number"  class="col-xs-10 col-sm-5" value="<?php echo $row_getrequest['request_ref_number']; ?>"/>
+																				<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Upload Data File</label>
+																				<div class="col-sm-6">
+																					<span id="sprytextfield2">
+																						<input class="col-xs-10 col-sm-5" id="id-input-file-2" name="id-input-file-2" type="file"/>
+																						<span class="textfieldRequiredMsg">*</span>
+																					</span>
+																				</div>
+																			</div>
+																			<div class="form-group">	
+																				<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Report Type</label>
+																				<div class="col-sm-6">
+																					<span id="spryselect7">
+																						<label>
+																							<select class="select form-control" name="status" id="status" required>
+																								<option value="">Choose Report Type</option>
+																								<option value="33">Interim</option>
+																								<option value="11">Final</option>
+																							</select>
+																						</label>
+																						<span class="selectInvalidMsg">*.</span>									  
+																					</span>
+																				</div>
+																			</div>
+																			<div class="space-4"></div>
+																			<div class="clearfix form-actions">
+																				<div class="col-md-offset-3 col-md-9">
+																					<button onClick="submit" type="submit" value="submit" class="btn btn-info">
+																						<i class="ace-icon fa fa-check bigger-110"></i>
+																						Submit											
+																					</button>
+																					<button class="btn" type="reset">
+																						<i class="ace-icon fa fa-undo bigger-110"></i>
+																						Reset											
+																					</button>
+																				</div>
+																			</div>   
+																		</form>
+																</div>    
+															</div>
+														</div>		
+														<?php
+													}
+												?>                 
 									</div>
-							  </div>
-                              		
-                                
-                                
+								</div>
 							</div><!-- /.col -->
 					  </div><!-- /.row -->
 					</div><!-- /.page-content -->
 				</div>
-</div><!-- /.main-content -->
+			</div><!-- /.main-content -->
 
 			<div class="footer">
 				<div class="footer-inner">
@@ -449,16 +354,17 @@ if (isset($_SERVER['QUERY_STRING'])) {
 					<div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder">Peleza</span>
-							Admin &copy; 2018						</span>
-
-&nbsp;&nbsp;											</div>
-
+							Admin &copy; 2018						
+						</span>
+						&nbsp;&nbsp;											
+					</div>
 					<!-- /section:basics/footer -->
 				</div>
 			</div>
 
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i></a>		</div><!-- /.main-container -->
+			<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i></a>
+		</div><!-- /.main-container -->
 
 
 		<!-- basic scripts -->
@@ -471,10 +377,10 @@ if (isset($_SERVER['QUERY_STRING'])) {
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='../../assets/js/jquery1x.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
+		<script type="text/javascript">
+		window.jQuery || document.write("<script src='../../assets/js/jquery1x.js'>"+"<"+"/script>");
+		</script>
+		<![endif]-->
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='../../assets/js/jquery.mobile.custom.js'>"+"<"+"/script>");
 		</script>
@@ -482,7 +388,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 
 		<!-- page specific plugin scripts -->
         
-        <!-- page specific plugin scripts -->
+		<!-- page specific plugin scripts -->
 		<script src="../../assets/js/dataTables/jquery.dataTables.js"></script>
 		<script src="../../assets/js/dataTables/jquery.dataTables.bootstrap.js"></script>
 		<script src="../../assets/js/dataTables/extensions/TableTools/js/dataTables.tableTools.js"></script>

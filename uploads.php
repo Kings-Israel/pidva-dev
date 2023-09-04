@@ -10,6 +10,7 @@ function uploadFile($key,$location,$name = null)
     //if (isset($_FILES[$name])) {
 
         $configs = parse_ini_file("/var/www/html/pidva-dev/config/config.ini", true);
+        // $configs = parse_ini_file("C:/xampp/htdocs/projects/pidva-dev/Connections/config.ini", true);
         $config = json_decode(json_encode($configs));
 
         $errors = array();
@@ -73,6 +74,7 @@ function uploadFile($key,$location,$name = null)
             $location = str_replace(" ","-",$location);
 
             $fna = "/var/www/html/ttt/".microtime(true)."_$filename";
+            // $fna = "/C:/xampp/htdocs/projects/pidva-dev/ttt/".microtime(true)."_$filename";
 
             move_uploaded_file($file_tmp, $fna);
             error_log("GOT path $fna ");

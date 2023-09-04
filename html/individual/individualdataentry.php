@@ -429,9 +429,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                         $reference_number = $refnumber2;
                                         $progressStatus = 'In Progress';
                                         $progressPercentage = 44;
-                                        $description =
-                                            'status updates at ' .
-                                            date('Y-m-d H:i:s');
+                                        $description = 'status updates at ' . date('Y-m-d H:i:s');
     
                                         if ($mysqli_affected_rows > 0) {
                                             $notify = new Notifier();
@@ -489,32 +487,38 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                             <td><?php echo $row_getstudent['bg_dataset_email']; ?></td>
                                             <td><?php echo $row_getstudent['bg_dataset_idnumber']; ?></td>
 
-                                            <td class="hidden-480">  <?php
-                                                if ($row_getstudent['verification_status'] == '44') {
-                                                    ?>
-                                                        <span class="label label-sm label-warning">In Progress</span>
-                                                    <?php
-                                                }
-                                                if ($row_getstudent['verification_status'] == '00') {
-                                                    ?>
-                                                        <span class="label label-sm label-purple">New Request</span>
-                                                    <?php
-                                                }
-                                                if ($row_getstudent['verification_status'] == '11') {
-                                                    ?>
-                                                        <span class="label label-sm label-success">Final</span>
-                                                    <?php
-                                                }
-                                                if ($row_getstudent['verification_status'] == '22') {
-                                                    ?>
-                                                        <span class="label label-sm label-warning">Not Reviewed</span>
-                                                    <?php
-                                                }
-                                                if ($row_getstudent['verification_status'] == '33') {
-                                                    ?>
-                                                        <span class="label label-sm label-primary">Interim Data</span>
-                                                    <?php
-                                                }
+                                            <td class="hidden-480"> 
+                                                <?php
+                                                    if($row_getstudent['verification_status'] === '44'){
+                                                        ?>
+                                                            <span class="label label-sm label-warning">In Progress</span>	
+                                                        <?php
+                                                    }
+                                                    if($row_getstudent['verification_status'] === '00') {
+                                                        ?>
+                                                            <span class="label label-sm label-purple">New Request</span>	
+                                                        <?php
+                                                    }	
+                                                    if($row_getstudent['verification_status'] === '11') {
+                                                        ?>
+                                                            <span class="label label-sm label-success">Final</span>	
+                                                        <?php
+                                                    }
+                                                    if($row_getstudent['verification_status'] === '22') {
+                                                        ?>
+                                                            <span class="label label-sm label-warning">UnReviewed</span>	
+                                                        <?php
+                                                    }	
+                                                    if($row_getstudent['verification_status'] === '33') {
+                                                        ?>
+                                                            <span class="label label-sm label-primary">Interim Data</span>	
+                                                        <?php
+                                                    }
+                                                    if ($row_getstudent['verification_status'] == '55') {
+                                                        ?>
+                                                            <span class="label label-sm label-danger">Invalidated</span>
+                                                        <?php
+                                                    }
                                                 ?>
                                             </td>
                                         </tr>
@@ -527,14 +531,14 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                             <th>Last Date Update</th>
                                             <th>Report Adverse Status</th>
                                             <th>Set Adverse Status</th>
-
                                         </tr>
                                         </thead>
 
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <a href="#"><?php echo $row_getstudent['user_name']; ?></a></td>
+                                                <a href="#"><?php echo $row_getstudent['user_name']; ?></a>
+                                            </td>
                                             <td><?php echo $row_getstudent['user_lock_date']; ?></td>
                                             <td><?php echo $row_getstudent['status_date']; ?></td>
                                             <td><?php
@@ -599,12 +603,9 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
 
                                                         <?php
                                                     }
-
                                                 }
-
                                                 ?>
                                             </td>
-
                                         </tr>
                                         </tbody>
                                     </table>
@@ -619,13 +620,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
 
                                         <tbody>
                                         <tr>
-
                                             <td width="50%">
-                                                <table id="simple-table"
-                                                       class="table  table-bordered table-hover"> <?php
-
+                                                <table id="simple-table" class="table  table-bordered table-hover">
+                                                    <?php
                                                     $refnumber = $row_getstudent['request_ref_number'];
-
                                                     mysqli_select_db($connect, $database_connect);
                                                     $query_getprogress2 = sprintf("SELECT
                                                                                     pel_module.module_role,
@@ -689,7 +687,6 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                                                         </button>
                                                                     </a>
                                                                 </td>
-
                                                             </tr>
 
                                                             <?php
@@ -698,11 +695,9 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                                 </table>
                                             </td>
                                             <td width="">
-                                                <table id="simple-table"
-                                                       class="table  table-bordered table-hover"> <?php
-
+                                                <table id="simple-table" class="table  table-bordered table-hover">
+                                                    <?php
                                                     $filetracker = $row_getstudent['file_tracker'];
-
                                                     mysqli_select_db($connect, $database_connect);
                                                     $query_getfiles = "SELECT pel_psmt_request.request_id, pel_psmt_files.psmtfile_filetoken,pel_psmt_files.psmtfile_id,pel_psmt_files.psmtfile_name,pel_psmt_files.psmtfile_type,pel_psmt_files.`status`,
                                                                                 pel_psmt_files.request_id,pel_psmt_files.client_id FROM pel_psmt_request
@@ -716,24 +711,25 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $i++; ?>.</td>
-                                                            <td><a href="<?php echo $row_getfiles['psmtfile_name']; ?>"
+                                                            <td>
+                                                                <a href="<?php echo $row_getfiles['psmtfile_name']; ?>"
                                                                    target="_blank">
                                                                     <strong><?php echo $row_getfiles['psmtfile_type']; ?></strong>
-                                                                </a></td>
+                                                                </a>
+                                                            </td>
                                                         </tr>
 
                                                         <?php
                                                     } while ($row_getfiles = mysqli_fetch_assoc($getfiles)); ?>
                                                 </table>
                                             </td>
-                                            <td>    <?php
-
-
+                                            <td>
+                                                <?php
                                                 mysqli_select_db($connect, $database_connect);
 
                                                 $query_getfiles2 = "SELECT pel_psmt_request.request_id, pel_psmt_files.psmtfile_filetoken,pel_psmt_files.psmtfile_id,pel_psmt_files.psmtfile_name,pel_psmt_files.psmtfile_type,pel_psmt_files.`status`,
-pel_psmt_files.request_id,pel_psmt_files.client_id FROM pel_psmt_request
-Inner Join pel_psmt_files ON pel_psmt_request.file_tracker = pel_psmt_files.psmtfile_filetoken WHERE pel_psmt_request.file_tracker = '$filetracker' and pel_psmt_files.data_type='text'";
+                                                                    pel_psmt_files.request_id,pel_psmt_files.client_id FROM pel_psmt_request
+                                                                    Inner Join pel_psmt_files ON pel_psmt_request.file_tracker = pel_psmt_files.psmtfile_filetoken WHERE pel_psmt_request.file_tracker = '$filetracker' and pel_psmt_files.data_type='text'";
 
                                                 $getfiles2 = mysqli_query_ported($query_getfiles2, $connect) or die(mysqli_error($connect));
 
@@ -742,7 +738,6 @@ Inner Join pel_psmt_files ON pel_psmt_request.file_tracker = pel_psmt_files.psmt
                                                 $totalRows_getfiles2 = mysqli_num_rows($getfiles2);
 
                                                 if ($totalRows_getfiles2 > 0) {
-
                                                     ?>
                                                     <table id="simple-table" class="table  table-bordered table-hover">
                                                         <?php
@@ -751,40 +746,27 @@ Inner Join pel_psmt_files ON pel_psmt_request.file_tracker = pel_psmt_files.psmt
                                                             <tr>
                                                                 <td width="35%">
                                                                     <b><?php echo $row_getfiles2['psmtfile_type']; ?>
-                                                                        :</b></td>
+                                                                        :
+                                                                    </b>
+                                                                </td>
                                                                 <td><?php echo $row_getfiles2['psmtfile_name']; ?></td>
                                                             </tr>
 
                                                             <?php
                                                         } while ($row_getfiles2 = mysqli_fetch_assoc($getfiles2)); ?>
                                                     </table>
-
                                                     <?php
                                                 }
                                                 ?>
-
-
                                             </td>
-
-
                                         </tr>
                                         </tbody>
                                     </table>
-
-
                                     <div class="col-xs-12">
-                                        <?php
-
-                                        echo $errorcode;
-                                        ?>
+                                        <?php echo $errorcode; ?>
                                     </div>
-
-
                                 </div>
-
                             </div>
-
-
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.page-content -->
