@@ -395,7 +395,8 @@ if (isset($_POST['MM_insert']) && $_POST['MM_insert'] == 'newdetails') {
                                                 <td><?php echo $row_getstudent['dataset_incorporation_no']; ?></td>
                                                 <td><?php echo $row_getstudent['dataset_kra_pin']; ?></td>
 
-                                                <td class="hidden-480"> <?php
+                                                <td class="hidden-480"> 
+                                                    <?php
                                                     if ($row_getstudent['verification_status'] == '44') { ?>
                                                         <span class="label label-sm label-warning">In Progress</span>
                                                     <?php }
@@ -410,6 +411,10 @@ if (isset($_POST['MM_insert']) && $_POST['MM_insert'] == 'newdetails') {
                                                     <?php }
                                                     if ($row_getstudent['verification_status'] == '33') { ?>
                                                         <span class="label label-sm label-primary">Interim Data</span>
+                                                    <?php
+                                                    }
+                                                    if ($row_getstudent['verification_status'] == '55') { ?>
+                                                        <span class="label label-sm label-danger">Invalid</span>
                                                     <?php
                                                     }
                                                     ?>
