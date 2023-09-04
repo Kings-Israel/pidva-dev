@@ -235,7 +235,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 																			</td>
 																			<td><?php echo $row_getstudent['client_name']; ?></td>
 																			<td><?php echo $row_getstudent['request_plan']; ?></td>
-																			<td><?php echo date('Y m d H:i', strtotime($row_getstudent['request_date'] . ' + 2 hours')); ?></td>
+																			<td><?php echo date('Y m d H:i', strtotime($row_getstudent['request_date'])); ?></td>
 																			<td class="hidden-480"> 
 																				<?php 
 																					if($row_getstudent['verification_status']=='44'){
