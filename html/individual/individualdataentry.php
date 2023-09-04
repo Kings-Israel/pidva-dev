@@ -302,7 +302,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                 $getgetprogress_update2 = mysqli_query_ported($query_getgetprogress_update2, $connect) or die(mysqli_error($connect));
                                 $row_getgetprogress_update2 = mysqli_fetch_assoc($getgetprogress_update2);
                                 $totalRows_getgetprogress_update2 = mysqli_num_rows($getgetprogress_update2);
-
+                                
                                 if ($totalRows_getgetprogress_update2 == 0) {
                                     $deleteSQL2 = sprintf("UPDATE pel_psmt_request SET status='11', verification_status='11', final_notify='11' WHERE request_ref_number=%s",
                                         GetSQLValueString($refnumber2, "text"));
@@ -417,7 +417,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                         }
                                     }
                                 } else {
-                                    if ($row_getstudent['status'] == '00') {
+                                    if ($row_getstudent['verification_status'] == '00') {
                                         $deleteSQL2 = sprintf(
                                             "UPDATE pel_psmt_request SET status='44', verification_status='44' WHERE request_ref_number=%s",
                                             GetSQLValueString($refnumber2, 'text')
