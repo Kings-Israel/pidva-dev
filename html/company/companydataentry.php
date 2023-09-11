@@ -591,6 +591,9 @@ if (isset($_POST['MM_insert']) && $_POST['MM_insert'] == 'newdetails') {
                                                                         <strong><?php echo $row_getfiles['psmtfile_type']; ?></strong>
                                                                     </a>
                                                                 </td>
+                                                                <td>
+                                                                    <a href="../filesmanager/download.php?filename=<?php echo $row_getfiles2['psmtfile_name'] ?>" class="btn btn-sm btn-primary">Download</a>
+                                                                </td>
                                                             </tr>
                                                         <?php } while ($row_getfiles = mysqli_fetch_assoc($getfiles));
                                                         ?>
@@ -612,9 +615,6 @@ if (isset($_POST['MM_insert']) && $_POST['MM_insert'] == 'newdetails') {
                                                                         <b><?php echo $row_getfiles2['psmtfile_type']; ?>:</b>
                                                                     </td>
                                                                     <td><?php echo $row_getfiles2['psmtfile_name']; ?></td>
-                                                                    <td>
-                                                                        <a href="../filesmanager/download.php?filename=<?php echo $row_getfiles2['psmtfile_name'] ?>" class="btn btn-sm btn-primary">Download</a>
-                                                                    </td>
                                                                 </tr>
                                                             <?php } while ($row_getfiles2 = mysqli_fetch_assoc($getfiles2)); ?>
                                                         </table>
