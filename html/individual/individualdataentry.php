@@ -92,7 +92,6 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editdetails")) {
 
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
-
     $insertSQL = sprintf("INSERT INTO pel_company_data (company_name, registration_number, status, registration_date, country, added_by, data_source, data_notes, address, office, operation_status, industry, search_id ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         GetSQLValueString(strtoupper($_POST['company_name']), "text"),
         GetSQLValueString(strtoupper($_POST['registration_number']), "text"),
@@ -112,22 +111,20 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
     mysqli_query_ported($insertSQL, $connect);
     $colname_getrequestid = $_POST['request_id'];
 
-    //echo $Result1 = mysqli_query_ported($insertSQL, $connect)or die(mysqli_error($connect));
     if (mysqli_error($connect)) {
         $errorcode = '<div class="alert alert-danger">
-											<button type="button" class="close" data-dismiss="alert">
-												<i class="ace-icon fa fa-times"></i>
-											</button>
+                        <button type="button" class="close" data-dismiss="alert">
+                            <i class="ace-icon fa fa-times"></i>
+                        </button>
 
-											<strong>
-												<i class="ace-icon fa fa-times"></i>
-												Oh snap!
-											</strong>
+                        <strong>
+                            <i class="ace-icon fa fa-times"></i>
+                            Oh snap!
+                        </strong>
 
-										 Details of the company ahvent been added.
-											<br />
-										</div>';
-
+                        Details of the company ahvent been added.
+                        <br />
+                    </div>';
     } else {
         $updateGoTo = "companyregistrationview.php?request_id=$colname_getrequestid";
         header(sprintf("Location: %s", $updateGoTo));
@@ -739,7 +736,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
 
                                                 if ($totalRows_getfiles2 > 0) {
                                                     ?>
-                                                    <table id="simple-table" class="table  table-bordered table-hover">
+                                                    <table id="simple-table" class="table table-bordered table-hover">
                                                         <?php
                                                         do {
                                                             ?>
@@ -750,8 +747,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                                                     </b>
                                                                 </td>
                                                                 <td><?php echo $row_getfiles2['psmtfile_name']; ?></td>
+                                                                <td>
+                                                                    <a href="../filesmanager/download.php?filename=<?php echo $row_getfiles2['psmtfile_name'] ?>" class="btn btn-sm btn-primary">Download</a>
+                                                                </td>
                                                             </tr>
-
                                                             <?php
                                                         } while ($row_getfiles2 = mysqli_fetch_assoc($getfiles2)); ?>
                                                     </table>
@@ -779,11 +778,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                 <div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder">Peleza</span>
-							Admin &copy; 2018						</span>
-
+							Admin &copy; 2018
+                        </span>
                     &nbsp;&nbsp;
                 </div>
-
                 <!-- /section:basics/footer -->
             </div>
         </div>
