@@ -593,11 +593,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
 
                                                     } else {
                                                         $updateGoTo = "individualdataentry.php?request_id=$colname_getrequestid";
-
                                                         ?>
-                                                        <meta http-equiv="Refresh"
-                                                              content="0; url=<?php echo $updateGoTo; ?>">
-
+                                                            <meta http-equiv="Refresh" content="0; url=<?php echo $updateGoTo; ?>">
                                                         <?php
                                                     }
                                                 }
@@ -715,7 +712,6 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                                                 </a>
                                                             </td>
                                                         </tr>
-
                                                         <?php
                                                     } while ($row_getfiles = mysqli_fetch_assoc($getfiles)); ?>
                                                 </table>
