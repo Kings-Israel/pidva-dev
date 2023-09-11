@@ -545,9 +545,7 @@ if (isset($_POST['MM_insert']) && $_POST['MM_insert'] == 'newdetails') {
                                                                         </a>
                                                                     </td>
                                                                 </tr>
-                                                        <?php } while (
-                                                                $row_getprogress2 = mysqli_fetch_assoc($getprogress2)
-                                                            );
+                                                            <?php } while ($row_getprogress2 = mysqli_fetch_assoc($getprogress2));
                                                         }
                                                         ?>
                                                     </table>
@@ -582,72 +580,44 @@ if (isset($_POST['MM_insert']) && $_POST['MM_insert'] == 'newdetails') {
                                                             <tr>
                                                                 <td><?php
                                                                     echo $i++;
-                                                                    $file_name =
-                                                                        $row_getfiles['psmtfile_name'];
-                                                                    $starts_with = startsWith(
-                                                                        $file_name,
-                                                                        'psmt_req/'
-                                                                    );
+                                                                    $file_name = $row_getfiles['psmtfile_name'];
+                                                                    $starts_with = startsWith($file_name, 'psmt_req/');
                                                                     ?>.</td>
                                                                 <td>
                                                                     <a href="<?php
-                                                                                echo $starts_with
-                                                                                    ? $API_MEDIA_URL
-                                                                                    : 'http://46.101.16.235/pilotclient/datafiles/';
+                                                                                echo $starts_with ? $API_MEDIA_URL : 'http://46.101.16.235/pilotclient/datafiles/';
                                                                                 echo $file_name;
-                                                                                ?>" target="_blank">
+                                                                            ?>" target="_blank">
                                                                         <strong><?php echo $row_getfiles['psmtfile_type']; ?></strong>
                                                                     </a>
                                                                 </td>
                                                             </tr>
-
-                                                        <?php } while (
-                                                            $row_getfiles = mysqli_fetch_assoc(
-                                                                $getfiles
-                                                            )
-                                                        );
+                                                        <?php } while ($row_getfiles = mysqli_fetch_assoc($getfiles));
                                                         ?>
                                                     </table>
                                                 </td>
                                                 <td> <?php
-                                                        mysqli_select_db(
-                                                            $connect,
-                                                            $database_connect
-                                                        );
+                                                        mysqli_select_db($connect, $database_connect);
                                                         $query_getfiles2 = "SELECT pel_psmt_request.request_id, pel_psmt_files.psmtfile_filetoken,pel_psmt_files.psmtfile_id,pel_psmt_files.psmtfile_name,pel_psmt_files.psmtfile_type,pel_psmt_files.`status`,
                                                                     pel_psmt_files.request_id,pel_psmt_files.client_id FROM pel_psmt_request
                                                                     Inner Join pel_psmt_files ON pel_psmt_request.file_tracker = pel_psmt_files.psmtfile_filetoken WHERE pel_psmt_request.file_tracker = '$filetracker' and pel_psmt_files.data_type='text'";
-                                                        ($getfiles2 = mysqli_query_ported(
-                                                            $query_getfiles2,
-                                                            $connect
-                                                        )) or
-                                                            die(mysqli_error($connect));
-                                                        $row_getfiles2 = mysqli_fetch_assoc(
-                                                            $getfiles2
-                                                        );
-                                                        $totalRows_getfiles2 = mysqli_num_rows(
-                                                            $getfiles2
-                                                        );
-                                                        if (
-                                                            $totalRows_getfiles2 > 0
-                                                        ) { ?>
+                                                        ($getfiles2 = mysqli_query_ported($query_getfiles2, $connect )) or die(mysqli_error($connect));
+                                                        $row_getfiles2 = mysqli_fetch_assoc( $getfiles2);
+                                                        $totalRows_getfiles2 = mysqli_num_rows($getfiles2);
+                                                        if ($totalRows_getfiles2 > 0 ) { ?>
                                                         <table id="simple-table" class="table table-bordered table-hover">
                                                             <?php do { ?>
                                                                 <tr>
                                                                     <td width="35%">
-                                                                        <b><?php echo $row_getfiles2['psmtfile_type']; ?>
-                                                                            :</b>
+                                                                        <b><?php echo $row_getfiles2['psmtfile_type']; ?>:</b>
                                                                     </td>
                                                                     <td><?php echo $row_getfiles2['psmtfile_name']; ?></td>
+                                                                    <td>
+                                                                        <a href="../filesmanager/download.php?filename=<?php echo $row_getfiles2['psmtfile_name'] ?>" class="btn btn-sm btn-primary">Download</a>
+                                                                    </td>
                                                                 </tr>
-
-                                                            <?php } while (
-                                                                $row_getfiles2 = mysqli_fetch_assoc(
-                                                                    $getfiles2
-                                                                )
-                                                            ); ?>
+                                                            <?php } while ($row_getfiles2 = mysqli_fetch_assoc($getfiles2)); ?>
                                                         </table>
-
                                                     <?php }
                                                     ?>
                                                 </td>
