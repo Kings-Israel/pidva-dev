@@ -157,6 +157,18 @@ if (isset($_POST['MM_insert']) && $_POST['MM_insert'] == 'newdetails') {
         header(sprintf('Location: %s', $updateGoTo));
     }
 }
+
+if (isset($_POST['status_manual'])) {
+    $request_id = GetSQLValueString($_POST['request_id'], 'text');
+    $updateSQL = sprintf(
+        'UPDATE pel_psmt_request SET verification_status = %s, status = %s WHERE request_id = %s', 
+        GetSQLValueString($_POST['status'], 'text'), 
+        GetSQLValueString($_POST['status'], 'text'), 
+        $request_id
+    );
+    mysqli_select_db($connect, $database_connect);
+    mysqli_query_ported($updateSQL, $connect);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -417,6 +429,10 @@ if (isset($_POST['MM_insert']) && $_POST['MM_insert'] == 'newdetails') {
                                                         <span class="label label-sm label-danger">Invalid</span>
                                                     <?php
                                                     }
+                                                    if ($row_getstudent['verification_status'] == '66') { ?>
+                                                        <span class="label label-sm label-warning">Manual</span>
+                                                    <?php
+                                                    }
                                                     ?>
                                                 </td>
                                             </tr>
@@ -463,16 +479,16 @@ if (isset($_POST['MM_insert']) && $_POST['MM_insert'] == 'newdetails') {
                                                         mysqli_select_db($connect, $database_connect);
                                                         $query_getprogress2 = sprintf(
                                                             "SELECT
-                                                        pel_module.module_role,
-                                                        pel_psmt_request_modules.`status`,
-                                                        pel_psmt_request_modules.request_ref_number,
-                                                        pel_psmt_request_modules.module_name,
-                                                        pel_psmt_request_modules.module_id,
-                                                        pel_psmt_request_modules.parent_module_id,
-                                                        pel_psmt_request_modules.by_pass
-                                                        FROM
-                                                        pel_module
-                                                        Inner Join pel_psmt_request_modules ON pel_psmt_request_modules.module_id = pel_module.module_id WHERE pel_psmt_request_modules.request_ref_number = %s ORDER BY pel_psmt_request_modules.`status` DESC",
+                                                            pel_module.module_role,
+                                                            pel_psmt_request_modules.`status`,
+                                                            pel_psmt_request_modules.request_ref_number,
+                                                            pel_psmt_request_modules.module_name,
+                                                            pel_psmt_request_modules.module_id,
+                                                            pel_psmt_request_modules.parent_module_id,
+                                                            pel_psmt_request_modules.by_pass
+                                                            FROM
+                                                            pel_module
+                                                            Inner Join pel_psmt_request_modules ON pel_psmt_request_modules.module_id = pel_module.module_id WHERE pel_psmt_request_modules.request_ref_number = %s ORDER BY pel_psmt_request_modules.`status` DESC",
                                                             GetSQLValueString($refnumber, 'text')
                                                         );
                                                         ($getprogress2 = mysqli_query_ported($query_getprogress2, $connect)) or die(mysqli_error($connect));
@@ -497,17 +513,20 @@ if (isset($_POST['MM_insert']) && $_POST['MM_insert'] == 'newdetails') {
                                                                     </td>
                                                                     <td class="hidden-480">
                                                                         <?php 
-                                                                        if ($row_getprogress2['status'] == '44') {
-                                                                            echo '<span class="label label-sm label-warning">In Progress</span>';
-                                                                        } elseif ($row_getprogress2['status'] == '00') {
-                                                                            echo '<span class="label label-sm label-purple">No Data</span>';
-                                                                        } elseif ($row_getprogress2['status'] == '11') {
-                                                                            echo '<span class="label label-sm label-success">Valid Data</span>';
-                                                                        } elseif ($row_getprogress2['status'] == '22') {
-                                                                            echo '<span class="label label-sm label-warning">Not Reviewed</span>';
-                                                                        } elseif ($row_getprogress2['status'] == '33') {
-                                                                            echo '<span class="label label-sm label-primary">Interim Data</span>';
-                                                                        } ?>
+                                                                            if ($row_getprogress2['status'] == '44') {
+                                                                                echo '<span class="label label-sm label-warning">In Progress</span>';
+                                                                            } elseif ($row_getprogress2['status'] == '00') {
+                                                                                echo '<span class="label label-sm label-purple">No Data</span>';
+                                                                            } elseif ($row_getprogress2['status'] == '11') {
+                                                                                echo '<span class="label label-sm label-success">Valid Data</span>';
+                                                                            } elseif ($row_getprogress2['status'] == '22') {
+                                                                                echo '<span class="label label-sm label-warning">Not Reviewed</span>';
+                                                                            } elseif ($row_getprogress2['status'] == '33') {
+                                                                                echo '<span class="label label-sm label-primary">Interim Data</span>';
+                                                                            } elseif ($row_getprogress2['status'] == '66') {
+                                                                                echo '<span class="label label-sm label-warning">Manual</span>';
+                                                                            } 
+                                                                        ?>
                                                                     </td>
                                                                     <td>
                                                                         <?php
@@ -544,6 +563,21 @@ if (isset($_POST['MM_insert']) && $_POST['MM_insert'] == 'newdetails') {
                                                                             </button>
                                                                         </a>
                                                                     </td>
+
+                                                                    <?php
+                                                                        if ($row_getstudent['verification_status'] !== '66') {
+                                                                        ?>
+                                                                            <td>
+                                                                                <form action="" method="post">
+                                                                                    <input type="hidden" name="status_manual" value="manual">
+                                                                                    <input type="hidden" name="status" value="66">
+                                                                                    <input type="hidden" name="request_id" value="<?php echo $row_getstudent['request_id'] ?>">
+                                                                                    <button type="submit" class="btn btn-warning btn-xs">Set to Manual</button>
+                                                                                </form>
+                                                                            </td>
+                                                                        <?php
+                                                                        }
+                                                                    ?>
                                                                 </tr>
                                                             <?php } while ($row_getprogress2 = mysqli_fetch_assoc($getprogress2));
                                                         }

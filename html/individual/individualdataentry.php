@@ -516,6 +516,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                                             <span class="label label-sm label-danger">Invalidated</span>
                                                         <?php
                                                     }
+                                                    if ($row_getstudent['verification_status'] == '66') { ?>
+                                                        <span class="label label-sm label-warning">Manual</span>
+                                                    <?php
+                                                    }
                                                 ?>
                                             </td>
                                         </tr>
@@ -642,8 +646,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                                                 <td>
                                                                     <strong><?php echo $row_getprogress2['module_name']; ?></strong>
                                                                 </td>
-                                                                <td class="hidden-480">  <?php
-
+                                                                <td class="hidden-480"> 
+                                                                    <?php
                                                                     if ($row_getprogress2['status'] == '44') {
                                                                         ?>
 
@@ -662,15 +666,21 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                                                     }
                                                                     if ($row_getprogress2['status'] == '22') {
                                                                         ?>
-                                                                        <span class="label label-sm label-warning">Not Reviewed</span>
+                                                                            <span class="label label-sm label-warning">Not Reviewed</span>
                                                                         <?php
                                                                     }
                                                                     if ($row_getprogress2['status'] == '33') {
                                                                         ?>
-                                                                        <span class="label label-sm label-primary">Interim Data</span>
+                                                                            <span class="label label-sm label-primary">Interim Data</span>
                                                                         <?php
                                                                     }
-                                                                    ?>    </td>
+                                                                    if ($row_getprogress2['status'] == '66') {
+                                                                        ?>
+                                                                            <span class="label label-sm label-warning">Manual</span>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                </td>
                                                                 <?php $pagename = $row_getprogress2['module_name'] == "EDUCATION VERIFICATION" ? "educationcheck" : $row_getprogress2['module_role']; ?>
 
                                                                 <td>
@@ -681,6 +691,20 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                                                         </button>
                                                                     </a>
                                                                 </td>
+                                                                <?php
+                                                                    if ($row_getstudent['verification_status'] !== '66') {
+                                                                        ?>
+                                                                            <td>
+                                                                                    <form action="" method="post">
+                                                                                        <input type="hidden" name="status_manual" value="manual">
+                                                                                        <input type="hidden" name="status" value="66">
+                                                                                        <input type="hidden" name="request_id" value="<?php echo $row_getstudent['request_id'] ?>">
+                                                                                        <button type="submit" class="btn btn-warning btn-xs">Set to Manual</button>
+                                                                                    </form>
+                                                                            </td>
+                                                                        <?php
+                                                                    }
+                                                                ?>
                                                             </tr>
 
                                                             <?php
@@ -689,7 +713,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
                                                 </table>
                                             </td>
                                             <td width="">
-                                                <table id="simple-table" class="table  table-bordered table-hover">
+                                                <table id="simple-table" class="table table-bordered table-hover">
                                                     <?php
                                                     $filetracker = $row_getstudent['file_tracker'];
                                                     mysqli_select_db($connect, $database_connect);
