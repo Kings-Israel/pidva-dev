@@ -922,7 +922,7 @@ if ((isset($_GET['tax_compliance_id'])) && ($_GET['tax_compliance_id'] != "")) {
 																					</div> -->
 																					<!-- <div id="editor" contenteditable><?php echo $row_getdetails['data_notes']; ?></div> -->
 																				</div>
-																				<textarea name="data_notes" id="editorCopy2" cols="4" required><?php echo $row_getdetails['data_notes']; ?></textarea>
+																				<textarea name="data_notes" id="editorCopy2" cols="10" rows="20" required><?php echo $row_getdetails['data_notes']; ?></textarea>
 																				<br />
 																				<div class="space-10"></div>
 																				<div class="clearfix form-actions">
