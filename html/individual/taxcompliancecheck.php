@@ -136,7 +136,8 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editdetails")) {
 	} else {
 		$filenameuploaded = $_POST['tax_photo2'];
 	}
-	echo ($_POST['tax_compliance_id']);
+	echo $_POST['tax_compliance_id'];
+	return;
 	$updateSQL = sprintf(
 		"UPDATE pel_individual_tax_data SET first_name=%s, identity_number=%s, status=%s, date_added=%s, added_by=%s, expiry_date=%s, data_source=%s, data_notes=%s, tax_organisation=%s, tax_number=%s, tax_photo=%s, tax_status=%s, country=%s WHERE tax_compliance_id=%s",
 		GetSQLValueString(strtoupper($_POST['first_name']), "text"),
