@@ -155,9 +155,6 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editdetails")) {
 			GetSQLValueString($_POST['tax_compliance_id'], "int")
 	);
 
-	echo $updateSQL;
-	return;
-
 	mysqli_select_db($connect, $database_connect);
 	mysqli_query_ported($updateSQL, $connect);
 
@@ -309,8 +306,6 @@ if ((isset($_GET['tax_compliance_id'])) && ($_GET['tax_compliance_id'] != "")) {
 		);
 		mysqli_select_db($connect, $database_connect);
 		$Result1 = mysqli_query_ported($deleteSQL, $connect) or die(mysqli_error($connect));
-
-
 
 		if (mysqli_error($connect)) {
 			$errorcode = '<div class="alert alert-danger">
@@ -922,7 +917,7 @@ if ((isset($_GET['tax_compliance_id'])) && ($_GET['tax_compliance_id'] != "")) {
 																					</div> -->
 																					<!-- <div id="editor" contenteditable><?php echo $row_getdetails['data_notes']; ?></div> -->
 																				</div>
-																				<textarea name="data_notes" id="editorCopy2" cols="10" rows="20" required><?php echo $row_getdetails['data_notes']; ?></textarea>
+																				<textarea name="data_notes" id="editorCopy2" cols="30" rows="8" required><?php echo $row_getdetails['data_notes']; ?></textarea>
 																				<br />
 																				<div class="space-10"></div>
 																				<div class="clearfix form-actions">
