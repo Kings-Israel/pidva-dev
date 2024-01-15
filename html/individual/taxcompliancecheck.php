@@ -122,6 +122,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "checkindb")) {
 }
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editdetails")) {
+	echo 'Submitted';
+	return;
 	if (is_uploaded_file($_FILES['tax_photo']['tmp_name'])) {
 		date_default_timezone_set('Africa/Nairobi');
 		$date_insert = date('dmYhis');
@@ -933,7 +935,7 @@ if ((isset($_GET['tax_compliance_id'])) && ($_GET['tax_compliance_id'] != "")) {
 																							Reset </button>
 																					</div>
 																				</div>
-																				<input type="text" name="MM_update" value="editdetails">
+																				<input type="hidden" name="MM_update" value="editdetails">
 																		</form>
 																	</div>
 																	<div class="modal-footer no-margin-top">
