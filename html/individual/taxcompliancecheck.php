@@ -136,8 +136,7 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editdetails")) {
 	} else {
 		$filenameuploaded = $_POST['tax_photo2'];
 	}
-	echo $_POST['tax_compliance_id'];
-	return;
+
 	$updateSQL = sprintf(
 		"UPDATE pel_individual_tax_data SET first_name=%s, identity_number=%s, status=%s, date_added=%s, added_by=%s, expiry_date=%s, data_source=%s, data_notes=%s, tax_organisation=%s, tax_number=%s, tax_photo=%s, tax_status=%s, country=%s WHERE tax_compliance_id=%s",
 			GetSQLValueString(strtoupper($_POST['first_name']), "text"),
@@ -156,6 +155,9 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editdetails")) {
 			GetSQLValueString($_POST['tax_compliance_id'], "int")
 	);
 
+	echo $updateSQL;
+	return;
+
 	mysqli_select_db($connect, $database_connect);
 	mysqli_query_ported($updateSQL, $connect);
 
@@ -164,18 +166,18 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editdetails")) {
 
 	if (mysqli_error($connect)) {
 		$errorcode = '<div class="alert alert-danger">
-											<button type="button" class="close" data-dismiss="alert">
-												<i class="ace-icon fa fa-times"></i>
-											</button>
+										<button type="button" class="close" data-dismiss="alert">
+											<i class="ace-icon fa fa-times"></i>
+										</button>
 
-											<strong>
-												<i class="ace-icon fa fa-times"></i>
-												ERROR!!!!!
-											</strong>
+										<strong>
+											<i class="ace-icon fa fa-times"></i>
+											ERROR!!!!!
+										</strong>
 
-											 Details of the Tax Compliance were not updated succesfully.
-											<br />
-										</div>';
+											Details of the Tax Compliance were not updated succesfully.
+										<br />
+									</div>';
 	} else {
 		$updateGoTo = "taxcompliancecheck.php?request_id=$colname_getrequestid&moduleid=$colname_getmoduleid";
 		/* if (isset($_SERVER['QUERY_STRING'])) {
