@@ -140,20 +140,20 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editdetails")) {
 	return;
 	$updateSQL = sprintf(
 		"UPDATE pel_individual_tax_data SET first_name=%s, identity_number=%s, status=%s, date_added=%s, added_by=%s, expiry_date=%s, data_source=%s, data_notes=%s, tax_organisation=%s, tax_number=%s, tax_photo=%s, tax_status=%s, country=%s WHERE tax_compliance_id=%s",
-		GetSQLValueString(strtoupper($_POST['first_name']), "text"),
-		GetSQLValueString(strtoupper($_POST['identity_number']), "text"),
-		GetSQLValueString($_POST['status'], "text"),
-		GetSQLValueString($_POST['date_added'], "text"),
-		GetSQLValueString($_POST['added_by'], "text"),
-		GetSQLValueString($_POST['expiry_date'], "text"),
-		GetSQLValueString($_POST['data_source'], "text"),
-		GetSQLValueString($_POST['data_notes'], "text"),
-		GetSQLValueString($_POST['tax_organisation'], "text"),
-		GetSQLValueString($_POST['tax_number'], "text"),
-		GetSQLValueString($filenameuploaded, "text"),
-		GetSQLValueString($_POST['tax_status'], "text"),
-		GetSQLValueString($_POST['country'], "text"),
-		GetSQLValueString($_POST['tax_compliance_id'], "int")
+			GetSQLValueString(strtoupper($_POST['first_name']), "text"),
+			GetSQLValueString(strtoupper($_POST['identity_number']), "text"),
+			GetSQLValueString($_POST['status'], "text"),
+			GetSQLValueString($_POST['date_added'], "text"),
+			GetSQLValueString($_POST['added_by'], "text"),
+			GetSQLValueString($_POST['expiry_date'], "text"),
+			GetSQLValueString($_POST['data_source'], "text"),
+			GetSQLValueString($_POST['data_notes'], "text"),
+			GetSQLValueString($_POST['tax_organisation'], "text"),
+			GetSQLValueString($_POST['tax_number'], "text"),
+			GetSQLValueString($filenameuploaded, "text"),
+			GetSQLValueString($_POST['tax_status'], "text"),
+			GetSQLValueString($_POST['country'], "text"),
+			GetSQLValueString($_POST['tax_compliance_id'], "int")
 	);
 
 	mysqli_select_db($connect, $database_connect);
@@ -201,19 +201,19 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "newdetails")) {
 
 		$insertSQL = sprintf(
 			"INSERT INTO pel_individual_tax_data (first_name, identity_number, status, date_added, added_by, expiry_date, data_source, data_notes, tax_organisation, tax_number, tax_photo, tax_status, country, search_id) VALUES (%s, %s, %s, now(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-			GetSQLValueString(strtoupper($_POST['first_name']), "text"),
-			GetSQLValueString(strtoupper($_POST['identity_number']), "text"),
-			GetSQLValueString($_POST['status'], "text"),
-			GetSQLValueString($_POST['added_by'], "text"),
-			GetSQLValueString($_POST['expiry_date'], "text"),
-			GetSQLValueString($_POST['data_source'], "text"),
-			GetSQLValueString($_POST['data_notes'], "text"),
-			GetSQLValueString(strtoupper($_POST['tax_organisation']), "text"),
-			GetSQLValueString(strtoupper($_POST['tax_number']), "text"),
-			GetSQLValueString($filenameuploaded, "text"),
-			GetSQLValueString($_POST['tax_status'], "text"),
-			GetSQLValueString($_POST['country'], "text"),
-			GetSQLValueString($_POST['search_id'], "text")
+				GetSQLValueString(strtoupper($_POST['first_name']), "text"),
+				GetSQLValueString(strtoupper($_POST['identity_number']), "text"),
+				GetSQLValueString($_POST['status'], "text"),
+				GetSQLValueString($_POST['added_by'], "text"),
+				GetSQLValueString($_POST['expiry_date'], "text"),
+				GetSQLValueString($_POST['data_source'], "text"),
+				GetSQLValueString($_POST['data_notes'], "text"),
+				GetSQLValueString(strtoupper($_POST['tax_organisation']), "text"),
+				GetSQLValueString(strtoupper($_POST['tax_number']), "text"),
+				GetSQLValueString($filenameuploaded, "text"),
+				GetSQLValueString($_POST['tax_status'], "text"),
+				GetSQLValueString($_POST['country'], "text"),
+				GetSQLValueString($_POST['search_id'], "text")
 		);
 
 		mysqli_select_db($connect, $database_connect);
