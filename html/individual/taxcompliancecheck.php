@@ -157,8 +157,6 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "editdetails")) {
 	mysqli_select_db($connect, $database_connect);
 	mysqli_query_ported($updateSQL, $connect);
 
-	print('Updated');
-
 	$colname_getrequestid = $_POST['request_id'];
 	$colname_getmoduleid = $_POST['moduleid'];
 
@@ -407,10 +405,6 @@ if ((isset($_GET['search_id_approve'])) && ($_GET['search_id_approve'] != "")) {
 										</div>';
 		} else {
 			$updateGoTo = "taxcompliancecheck.php?request_id=$colname_getrequestid&moduleid=$colname_getmoduleid";
-			/* if (isset($_SERVER['QUERY_STRING'])) {
-				$updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
-				$updateGoTo .= $_SERVER['QUERY_STRING'];
-			}*/
 			header(sprintf("Location: %s", $updateGoTo));
 		}
 	}
@@ -443,10 +437,6 @@ if ((isset($_GET['tax_compliance_id'])) && ($_GET['tax_compliance_id'] != "")) {
 										</div>';
 		} else {
 			$updateGoTo = "taxcompliancecheck.php?request_id=$colname_getrequestid&moduleid=$colname_getmoduleid";
-			/* if (isset($_SERVER['QUERY_STRING'])) {
-				$updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
-				$updateGoTo .= $_SERVER['QUERY_STRING'];
-			}*/
 			header(sprintf("Location: %s", $updateGoTo));
 		}
 	}
@@ -704,9 +694,7 @@ if ((isset($_GET['tax_compliance_id'])) && ($_GET['tax_compliance_id'] != "")) {
 									if ($totalRows_getdetails > 0) {
 									?>
 										<div class="col-lg-12" align="center">
-											<h3 align="left" class=" smaller lighter blue"><strong>INDIVIDUAL TAX COMPLIANCE CHECK DETAILS: </strong>
-											</h3>
-
+											<h3 align="left" class=" smaller lighter blue"><strong>INDIVIDUAL TAX COMPLIANCE CHECK DETAILS: </strong></h3>
 											<table id="simple-table" class="table table-bordered table-hover">
 												<thead>
 													<tr>
@@ -945,7 +933,7 @@ if ((isset($_GET['tax_compliance_id'])) && ($_GET['tax_compliance_id'] != "")) {
 																							Reset </button>
 																					</div>
 																				</div>
-																				<input type="hidden" name="MM_update" value="editdetails">
+																				<input type="text" name="MM_update" value="editdetails">
 																		</form>
 																	</div>
 																	<div class="modal-footer no-margin-top">
@@ -1209,8 +1197,6 @@ if ((isset($_GET['tax_compliance_id'])) && ($_GET['tax_compliance_id'] != "")) {
 														<input type="hidden" id="request_id" name="request_id" value="<?php echo $colname_getrequestid; ?>" />
 														<input type="hidden" id="moduleid" name="moduleid" value="<?php echo $colname_getmoduleid; ?>" />
 														<input type="hidden" id="search_id" name="search_id" value="<?php echo $search_ref; ?>" />
-
-
 														<input type="hidden" id="status" name="status" value="22" />
 														<input type="hidden" id="added_by" name="added_by" value="<?php echo $_SESSION['MM_full_names'] . "(" . $_SESSION['MM_USR_EMAIL'] . ")"; ?>" />
 														<input type="hidden" id="date_added" name="date_added" value="<?php echo date('Y-m-d H:m:s'); ?>" />
