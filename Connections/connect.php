@@ -85,9 +85,6 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 
 // http://localhost/html/company/companyregcheck.php?fullnames=MARITA%20MUTEMI%20(marita@peleza.com)&status=11&search_id_approve=BOYA-RQ-C46D3Z2-102603&request_id=2606&moduleid=47
 // $ref_number = GetSQLValueString(isset($request['request_ref_number']) ? $request['request_ref_number'] : $_GET['search_id_approve'], 'text');
-
-
-
 function startsWith($string, $startString)
 {
     return strpos($string, $startString) === 0;
