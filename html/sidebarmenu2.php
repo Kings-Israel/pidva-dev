@@ -583,7 +583,9 @@
                             }
 
                     ?>
-        <li class="<?php if ($urlpar == 'hel') { echo "active"; } ?>">
+        <li class="<?php if ($urlpar == 'hel') {
+                        echo "active";
+                    } ?>">
             <a href="/html/help/help.php">
                 <i class="menu-icon fa fa-question-circle"></i>
                 Help Section

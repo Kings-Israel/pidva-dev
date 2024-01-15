@@ -885,17 +885,18 @@ if (!isset($_SESSION)) {
     <link href="https://pidva.africa/SpryAssets/SpryValidationSelect.css" rel="stylesheet">
     <link href="https://pidva.africa/SpryAssets/SpryValidationTextarea.css" rel="stylesheet">
     <link rel="stylesheet" href="https://pidva.africa/assets/css/ace.onpage-help.css">
-    <link rel="stylesheet" href="https://pidva.africa/docs/assets/js/themes/sunburst.css">
+    <!-- <link rel="stylesheet" href="https://pidva.africa/docs/assets/js/themes/sunburst.css"> -->
     <script type="text/javascript">
         ace.vars.base = ".."
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://pidva.africa/assets/js/ace/elements.onpage-help.js"></script>
     <script src="https://pidva.africa/assets/js/ace/ace.onpage-help.js"></script>
-    <script src="https://pidva.africa/docs/assets/js/rainbow.js"></script>
+    <!-- <script src="https://pidva.africa/docs/assets/js/rainbow.js"></script>
     <script src="https://pidva.africa/docs/assets/js/language/generic.js"></script>
     <script src="https://pidva.africa/docs/assets/js/language/html.js"></script>
     <script src="https://pidva.africa/docs/assets/js/language/css.js"></script>
-    <script src="https://pidva.africa/docs/assets/js/language/javascript.js"></script>
+    <script src="https://pidva.africa/docs/assets/js/language/javascript.js"></script> -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://pidva.africa/assets/js/socket.io.js"></script>
     <script src="https://pidva.africa/assets/js/websockets.js"></script>
